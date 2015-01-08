@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Branch Monster Factory</title>
+
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+	<script type='text/javascript' src="js/react.js"></script>
+	<script type='text/javascript' src="js/JSXTransformer.js"></script>
+
+      <script type="text/jsx">
+		/** @jsx React.DOM */
+		var Branchsters = React.createClass({
+			getInitialState: function() {
+				return { color: 0, bodyType: 0, faceType: 0 };
+			},
+			_changeColor: function(color){
+				this.setState({color: color});
+			},
+			_nextBody: function() {
+				if(this.state.bodyType < 3){
+					this.setState({ bodyType: this.state.bodyType + 1 });
+				} else {
+					this.setState({ bodyType: 0 });
+				}
+			},
+			_previousBody: function() {
+				if(this.state.bodyType > 0){
+					this.setState({ bodyType: this.state.bodyType - 1 });
+				} else {
+					this.setState({ bodyType: 3 });
+				}
+			},
+			_nextFace: function() {
+				if(this.state.faceType < 3){
+					this.setState({ faceType: this.state.faceType + 1 });
+				} else {
+					this.setState({ faceType: 0 });
+				}
+			},
+			_previousFace: function() {
+				if(this.state.faceType > 0){
+					this.setState({ faceType: this.state.faceType - 1 });
+				} else {
+					this.setState({ faceType: 3 });
+				}
+			},
+			render: function() {
+
+				var monsterColors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
+				var bodyTypes = [ 'img/monster.png','img/monster.png', 'img/monster.png', ''];
+				var faceTypes = [ '', '', ''];
+
+				console.log(this.state);
+
+				return (
+				<div>
+					<div className="container">
+						<h2><span className="green">Branch Monster Factory</span></h2>
+
+						<form method="POST">
+							<div className="form-wrapper">
+								<span className="label">Choose your monster's name</span>
+								<input type="text" name="name" placeholder="John" style={{marginBottom: "40px"}} />
+
+
+								<span className="label">Choose face and body</span>
+								<div className="monster-selection">
+									<div className="top"><a href="javascript:void(0)" onClick={this._previousFace} className="arrow"><i className="fa fa-chevron-up" /></a></div>
+									<div className="left"><a href="javascript:void(0)" onClick={this._previousBody} className="arrow"><i className="fa fa-chevron-left" /></a></div>
+									<div className="monster">
+										<div className="monster-background" style={{background: monsterColors[this.state.color]}}><img src={bodyTypes[this.state.bodyType]} /></div>
+									</div>
+									<div className="right"><a href="javascript:void(0)" onClick={this._nextBody} className="arrow"><i className="fa fa-chevron-right" /></a></div>
+									<div className="down"><a href="javascript:void(0)" onClick={this._nextFace} className="arrow"><i className="fa fa-chevron-down" /></a></div>
+								</div>
+
+
+								<span className="label">Pick a color</span>
+								<div className="color-palette">
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,0)} className="color" style={{ background: '#24A4DD' }}></a>
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,1)} className="color" style={{ background: '#EC6279' }}></a>
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,2)} className="color" style={{ background: '#29B471' }}></a>
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,3)} className="color" style={{ background: '#F69938' }}></a>
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,4)} className="color" style={{ background: '#84268B' }}></a>
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,5)} className="color" style={{ background: '#24CADA' }}></a>
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,6)} className="color" style={{ background: '#FED521' }}></a>
+									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,7)} className="color" style={{ background: '#9E1623' }}></a>
+								</div>
+
+
+								<a href="javascript:void(0)" className="create-button">Create your Monster</a>
+
+							</div>
+						</form>
+
+					</div>
+				</div>
+				);
+			}
+		});
+
+		React.renderComponent(
+			<Branchsters />, document.body
+        );
+	</script>
+</head>
+<body>
+
+</body>
+</html>
