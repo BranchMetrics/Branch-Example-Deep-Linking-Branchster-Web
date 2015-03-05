@@ -48,11 +48,35 @@
 			},
 			render: function() {
 
-				var monsterColors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
-				var bodyTypes = [ 'img/monster.png','img/monster.png', 'img/monster.png', ''];
-				var faceTypes = [ '', '', ''];
+				var monsterColors = [
+					'#24a4dd',
+					'#ec6279',
+					'#29b471',
+					'#f69938',
+					'#84268b',
+					'#24cada',
+					'#fed521',
+					'#9e1623'
+				];
 
-				console.log(this.state);
+				var bodyTypes = [ 
+					'img/Monsters/Bodies/0body.png',
+					'img/Monsters/Bodies/1body.png',
+					'img/Monsters/Bodies/2body.png',
+					'img/Monsters/Bodies/3body.png',
+					'img/Monsters/Bodies/4body.png'
+				];
+
+				var faceTypes = [ 
+					'img/Monsters/Faces/face0.png',
+					'img/Monsters/Faces/face1.png',
+					'img/Monsters/Faces/face2.png',
+					'img/Monsters/Faces/face3.png',
+					'img/Monsters/Faces/face4.png'
+				];
+
+				console.log("Body state: " + this.state.bodyType);
+				console.log("Face state: " + this.state.faceType);
 
 				return (
 				<div>
@@ -61,23 +85,48 @@
 
 						<form method="POST">
 							<div className="form-wrapper">
-								<span className="label">Choose your monster's name</span>
+								<span className="label">Choose your monster&#8217;s name</span>
 								<input type="text" name="name" placeholder="John" style={{marginBottom: "40px"}} />
 
 
 								<span className="label">Choose face and body</span>
 								<div className="monster-selection">
-									<div className="top"><a href="javascript:void(0)" onClick={this._previousFace} className="arrow"><i className="fa fa-chevron-up" /></a></div>
-									<div className="left"><a href="javascript:void(0)" onClick={this._previousBody} className="arrow"><i className="fa fa-chevron-left" /></a></div>
-									<div className="monster">
-										<div className="monster-background" style={{background: monsterColors[this.state.color]}}><img src={bodyTypes[this.state.bodyType]} /></div>
+
+									<div className="top">
+										<a href="javascript:void(0)" onClick={this._previousFace} className="arrow">
+											<i className="fa fa-chevron-up" />
+										</a>
 									</div>
-									<div className="right"><a href="javascript:void(0)" onClick={this._nextBody} className="arrow"><i className="fa fa-chevron-right" /></a></div>
-									<div className="down"><a href="javascript:void(0)" onClick={this._nextFace} className="arrow"><i className="fa fa-chevron-down" /></a></div>
+
+									<div className="left">
+										<a href="javascript:void(0)" onClick={this._previousBody} className="arrow">
+											<i className="fa fa-chevron-left" />
+										</a>
+									</div>
+
+									<div className="monster">
+										<div className="monster-background" style={{background: monsterColors[this.state.color]}}>
+											<img id="monster-body" src={bodyTypes[this.state.bodyType]} />
+										</div>
+										<img id="monster-face" src={faceTypes[this.state.faceType]} />
+									</div>
+
+									<div className="right">
+										<a href="javascript:void(0)" onClick={this._nextBody} className="arrow">
+											<i className="fa fa-chevron-right" />
+										</a>
+									</div>
+
+									<div className="down">
+										<a href="javascript:void(0)" onClick={this._nextFace} className="arrow">
+											<i className="fa fa-chevron-down" />
+										</a>
+									</div>
 								</div>
 
 
 								<span className="label">Pick a color</span>
+
 								<div className="color-palette">
 									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,0)} className="color" style={{ background: '#24A4DD' }}></a>
 									<a href="javascript:void(0)" onClick={this._changeColor.bind(this,1)} className="color" style={{ background: '#EC6279' }}></a>
