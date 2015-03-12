@@ -22,3 +22,37 @@ This example is written with [AngularJS](https://angularjs.org/) and [Bootstrap]
 First of all, we'll assume you have all of the tools and frameworks listed above installed. If you need help with any of them, Yeoman has a great summary of setting up a dev environment with what we'll be using [here](http://yeoman.io/codelab/setup.html).
 
 ##### 1. Install the Yeoman [AngularJS generator](https://www.npmjs.org/package/generator-angular)
+Open your favorite Bash terminal, and enter the following command:
+```
+npm install --global generator-angular@0.9.2
+```
+*Note: --global installs this generator globally, you may need sudo for the proper permissions. Or feel free to install it locally to your project by omitting the option*
+
+##### 2. Create a project folder and run the generator
+```
+mkdir Branchster-Web && cd Branchster-Web
+```
+Pick your directory name carefully, as the AngularJS generator will use this as the namespace for your app! For example, this directory name will produce: ```angular.module('Branchster-Web', [])```
+
+Now that you're in the project directory, let's run the AngularJS generator!
+```
+yo angular
+```
+
+Yeoman (yo), will now ask us a series of questions as so:
+![Yeoman prompt with question about SASS](tutorial-imgs/tut-1.png =250x)
+
+For Branchsters, we'll answer the questions as so:
+```
+Would you like to use Sass (with Compass)? No
+Would you like to include Bootstrap? Yes
+❯◉ angular-animate.js
+ ◉ angular-cookies.js
+ ◉ angular-resource.js
+ ◉ angular-route.js
+ ◯ angular-sanitize.js
+ ◉ angular-touch.js
+```
+
+And now a bunch of magic will happen (this is where you see the real value of Yeoman). Yeoman will automatically setup a directory scaffolding, and install the proper npm and bower packages! Great point to go grab a cub of coffee.
+
