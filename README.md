@@ -24,7 +24,7 @@ First of all, we'll assume you have all of the tools and frameworks listed above
 ##### 1. Install the Yeoman [AngularJS generator](https://www.npmjs.org/package/generator-angular)
 Open your favorite Bash terminal, and enter the following command:
 ```
-npm install --global generator-angular@0.9.2
+npm install --global generator-angular
 ```
 *Note: --global installs this generator globally, you may need sudo for the proper permissions. Or feel free to install it locally to your project by omitting the option*
 
@@ -53,6 +53,9 @@ Would you like to include Bootstrap? Yes
  ◯ angular-sanitize.js
  ◉ angular-touch.js
 ```
+*Tip: Select and deselect options in the Angular library list with the up and down arrow keys and the spacebar.*
 
-And now a bunch of magic will happen (this is where you see the real value of Yeoman). Yeoman will automatically setup a directory scaffolding, and install the proper npm and bower packages! Great point to go grab a cub of coffee.
+And now a bunch of magic will happen (this is where you see the real value of Yeoman). Yeoman will automatically setup a directory scaffolding, and install the proper npm and bower packages! This is a great point to go grab a cub of coffee, as it will take a few minutes to install everything.
+
+
 
