@@ -1,23 +1,30 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+<form>
+	<div class="form-group">
+		<label for="name" class="branchsters-heading">Choose your Monster's name</label>
+		<input type="text" class="form-control" id="name" name="name" placeholder="John">
+	<div class="form-group">
+		<label for="body" class="branchsters-heading">Choose face and body</label>
+		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
+			<!-- monster components -->
+			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{selectedFaceIndex}}face.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{selectedBodyIndex}}body.png"></img>
+			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
+			<!-- arrows -->
+			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-click="incrementFace(-1)"></i>
+			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-click="incrementFace(1)"></i>
+			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-click="incrementBody(-1)"></i>
+			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-click="incrementBody(1)"></i>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="color" class="branchsters-heading">Pick a color</label>
+		<div class="jumbotron branchsters-square" name="color">
+			<div class="btn-group btn-group-lg" role="group" ng-repeat="color in colors">
+				<button type="button" class="btn btn-default" ng-model="color" ng-click="switchColor($index)" ng-style="{'background-color': color}"></button>
+			</div>
+		</div>
+	</div>
+	<div class="form-group branchsters-heading">
+		<button type="button" class="btn btn-default btn-lg btn-success" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+	</div>
+</form>

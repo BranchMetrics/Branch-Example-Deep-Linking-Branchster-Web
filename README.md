@@ -21,22 +21,24 @@ This example is written with [AngularJS](https://angularjs.org/) and [Bootstrap]
 
 First of all, we'll assume you have all of the tools and frameworks listed above installed. If you need help with any of them, Yeoman has a great summary of setting up a dev environment with what we'll be using [here](http://yeoman.io/codelab/setup.html).
 
+If you'd like to follow along with the codebase, starting with step 3 (nothing much exists in the codebase before that), each commit is tagged with "STEP #".
+
 ##### 1. Install the Yeoman [AngularJS generator](https://www.npmjs.org/package/generator-angular)
 Open your favorite Bash terminal, and enter the following command:
 ```
-npm install --global generator-angular
+$ npm install --global generator-angular
 ```
 *Note: --global installs this generator globally, you may need sudo for the proper permissions. Or feel free to install it locally to your project by omitting the option*
 
 ##### 2. Create a project folder and run the generator
 ```
-mkdir Branchster-Web && cd Branchster-Web
+$ mkdir Branchster-Web && cd Branchster-Web
 ```
 Pick your directory name carefully, as the AngularJS generator will use this as the namespace for your app! For example, this directory name will produce: ```angular.module('Branchster-Web', [])```
 
 Now that you're in the project directory, let's run the AngularJS generator!
 ```
-yo angular
+$ yo angular
 ```
 
 Yeoman (yo), will now ask us a series of questions as so:
@@ -57,5 +59,73 @@ Would you like to include Bootstrap? Yes
 
 And now a bunch of magic will happen (this is where you see the real value of Yeoman). Yeoman will automatically setup a directory scaffolding, and install the proper npm and bower packages! This is a great point to go grab a cub of coffee, as it will take a few minutes to install everything.
 
+##### Livereload
+Now that Yeoman has setup the scaffolding for a basic Angular app, and setup some basic grunt tasks, run the following command:
+```
+$ grunt serve
+```
+
+Grunt will serve a live version of your app on port 9000, that automatically refreshses anytime files are changed! Try changing some files to see this working, as it will ome in very useful when we are styling Branhsters.
+
+##### 3. Build the Interface
+
+First, we need to make some modifications to the boilerplate Yeoman Angular template.
+
+**Let's just list the changes and additions by file and line number**
+
+##### app/index.html
+- 5: *add* ```<title>Branchsters Web</title>```
+- 26...30: *remove* ```<ul class="nav nav-pills pull-right">...</ul>```
+- 31: *change to* ```<h3 class="text-muted">Brancshters Monster Factory</h3>```
+- 37: *change to* ```<p><span class="glyphicon glyphicon-heart"></span> from the <a href="http://branch.io">Branch Metrics team</a></p>```
+- 75: *remove* ```<script src="scripts/controllers/about.js"></script>```
+
+##### app/views/main.html
+- 2...22: *remove all, leaving just* ```html <div class="jumbotron"></div>```
+
+##### app/scripts/app.js
+- 25...28: *remove all*
+
+##### app/scripts/controllers/main.js
+- 12...16: *remove all* ```$scope.awesomeThings...];```
+
+There are also some files we can delete:
+```
+$ rm app/views/about.html app/favicon.ico app/images/yeoman.png app/scripts/controllers/about.js
 
 
+We need to install a few more dependencies. This can easily be accomplished with Bower:
+
+```
+$ bower install --save fontawesome
+```
+
+main.js
+```
+  	// available branchster colors
+    $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
+
+    // loops through indices for the body and face, between 0 and max
+    $scope.loopIncrement = function(amount, index, max) {
+    	amount = (index === 0 && amount === -1) ? max : amount;
+		amount = (index === max && amount === 1) ? -1 * max : amount;
+		return amount;
+    };
+
+    // selected branchster on load
+    $scope.selectedFaceIndex = 0;
+    $scope.selectedBodyIndex = 0;
+    $scope.selectedColorIndex = 0;
+
+    $scope.switchColor = function(color) {
+    	$scope.selectedColorIndex = color;
+    };
+
+    $scope.incrementFace = function(amount) {
+    	$scope.selectedFaceIndex += $scope.loopIncrement(amount, $scope.selectedFaceIndex, 3);
+    };
+
+    $scope.incrementBody = function(amount) {
+    	$scope.selectedBodyIndex += $scope.loopIncrement(amount, $scope.selectedBodyIndex, 3);
+    };
+```

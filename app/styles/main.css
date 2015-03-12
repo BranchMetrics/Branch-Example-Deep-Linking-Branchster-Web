@@ -24,6 +24,76 @@ body {
   padding-bottom: 19px;
 }
 
+/* Branchsters classes */
+.branchsters-heading {
+	text-align: center;
+	width: 100%;
+	padding-top: 30px;
+}
+
+.branchsters-body-container {
+	  position: relative;
+	  height: 400px;
+}
+
+.branchsters-bodypart {
+	width: 200px;
+	height: 300px;
+	position: absolute;
+	margin-left: -100px;
+}
+
+.branchsters-square {
+	border: 1px solid #CCC;
+	border-bottom: 1px solid #CCC !important;
+	border-style: solid;
+	background-color: #fff;
+	border-radius: 20px !important;
+}
+
+#branchsters-face {
+	z-index: 3;
+}
+
+#branchsters-body {
+	z-index: 2;
+}
+
+.branchsters-bodycolor {
+	z-index: 1;
+}
+
+.branchsters-arrow {
+	cursor: pointer !important;
+}
+
+.branchsters-left-arrow {
+	position: absolute;
+	top: 190px;
+	left: 40px;
+}
+
+.branchsters-right-arrow {
+	position: absolute;
+	top: 190px;
+	right: 40px;
+}
+
+.branchsters-up-arrow {
+	position: absolute;
+	top: 10px;
+}
+
+.branchsters-down-arrow {
+	position: absolute;
+	bottom: 10px;
+}
+
+#branchsters-create-button {
+	top: -20px;
+	position: relative;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
