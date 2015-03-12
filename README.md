@@ -40,7 +40,7 @@ yo angular
 ```
 
 Yeoman (yo), will now ask us a series of questions as so:
-![Yeoman prompt with question about SASS](tutorial-imgs/tut-1.png =250x)
+![Yeoman prompt with question about SASS](tutorial-imgs/tut-1.png)
 
 For Branchsters, we'll answer the questions as so:
 ```
