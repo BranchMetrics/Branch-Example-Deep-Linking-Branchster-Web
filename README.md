@@ -322,6 +322,8 @@ You'll also need to initialize the SDK with your App Key. Per the Branch Web SDK
 We're now setup to add more functionality to our app, and integrate the Branch Web SDK. The SDK attaches an instance of itself to the global `window` object as `branch` - which will be accessible inside of the Angular controller.
 
 Lets add a few methods to the Angular controller, after the methods we have already implemented:
+
+app/scripts/controllers/main.js
 ```
 $scope.showEditor = true;
 
@@ -369,6 +371,7 @@ The next two methods, `createBranchster` and `recreateBranchster` switch between
 
 Next, we need to update our interface. We need to add `ng-show` bindings to all of the labels, inputs, and buttons that have to do with making a Branchster, and ng-hide bindings to every element that has to do with viewing a Branchster. Additionally, we're adding a 'RECREATE BRANCHSTER' button with an `ng-hide` binding to toggle back to editing mode, and a button group of the four sharing options.
 
+app/views/main.html
 ```
 <form>
 	<div class="form-group">
