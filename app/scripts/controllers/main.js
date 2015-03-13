@@ -9,6 +9,9 @@
  */
 angular.module('branchsterWebApp')
   .controller('MainCtrl', function ($scope) {
+  	// Step 3
+  	// ============================================================
+
   	// available branchster colors
     $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
 
@@ -24,7 +27,6 @@ angular.module('branchsterWebApp')
     $scope.selectedBodyIndex = 0;
     $scope.selectedColorIndex = 0;
     $scope.branchsterName = '';
-    $scope.showEditor = true;
 
     $scope.switchColor = function(color) {
     	$scope.selectedColorIndex = color;
@@ -38,11 +40,10 @@ angular.module('branchsterWebApp')
     	$scope.selectedBodyIndex += $scope.loopIncrement(amount, $scope.selectedBodyIndex, 3);
     };
 
-    //  new shit
+    //  Step 5
+    // ============================================================
 
-    $scope.recreateBranchster = function() {
-    	$scope.showEditor = true;
-    };
+    $scope.showEditor = true;
 
     $scope.linkData = {
 			'$color_index': $scope.selectedColorIndex,
@@ -63,6 +64,10 @@ angular.module('branchsterWebApp')
 			channel: 'banner',
 			data: $scope.linkData
 		});
+    };
+
+    $scope.recreateBranchster = function() {
+    	$scope.showEditor = true;
     };
 
     $scope.makeLink = function(channel) {

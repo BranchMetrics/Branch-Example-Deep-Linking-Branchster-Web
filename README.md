@@ -4,6 +4,8 @@ The [Branch Web SDK](https://github.com/BranchMetrics/Web-SDK) is a simple and p
 
 This example is written with [AngularJS](https://angularjs.org/) and [Bootstrap](http://getbootstrap.com/), and the project was started and managed with [Yeoman](http://yeoman.io/). Aren't familiar with AngularJS? That's OK, we just assume you have some JavaScript knowledge. We also have examples with other frameworks, like [React](http://facebook.github.io/react/), on the way. If you're not familiar with Yeoman, that's also OK - it's essentially a three prong bundle which includes: generators for starting projects (over 1000 available now), [Bower](http://bower.io/) for installing and managing dependencies (Including the Branch Web SDK!), and [Grunt](http://gruntjs.com/) for build and development tasks, live reload, etc.
 
+A live example of this app can be [found here](http://cdn.branch.io/branchster-angular).
+
 If you're only interested in seeing the example Branch Web SDK integration with Branchsters, skip to [step 4](#4-install-the-branch-web-sdk).
 
 #### Tools and frameworks used in this tutorial
@@ -16,8 +18,6 @@ If you're only interested in seeing the example Branch Web SDK integration with 
 - [AngularJS](https://angularjs.org/)
 - [Bootstrap](http://getbootstrap.com/)
 - [git](http://git-scm.com/)
-
-##### **Note: If you are unfamiliar with any tools in this list, background information is given on these topics in a box. Otherwise, feel free to skip that information to get to the meat.**
 
 ### Getting Started
 
@@ -109,32 +109,32 @@ First, let's write the JavaScript that will let the user build their Branchster.
 
 app/scripts/controllers/main.js
 ```
-  	// available branchster colors
-    $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
+// available branchster colors
+$scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
 
-    // loops through indices for the body and face, between 0 and max
-    $scope.loopIncrement = function(amount, index, max) {
-    	amount = (index === 0 && amount === -1) ? max : amount;
-		amount = (index === max && amount === 1) ? -1 * max : amount;
-		return amount;
-    };
+// loops through indices for the body and face, between 0 and max
+$scope.loopIncrement = function(amount, index, max) {
+	amount = (index === 0 && amount === -1) ? max : amount;
+	amount = (index === max && amount === 1) ? -1 * max : amount;
+	return amount;
+};
 
-    // selected branchster on load
-    $scope.selectedFaceIndex = 0;
-    $scope.selectedBodyIndex = 0;
-    $scope.selectedColorIndex = 0;
+// selected branchster on load
+$scope.selectedFaceIndex = 0;
+$scope.selectedBodyIndex = 0;
+$scope.selectedColorIndex = 0;
 
-    $scope.switchColor = function(color) {
-    	$scope.selectedColorIndex = color;
-    };
+$scope.switchColor = function(color) {
+	$scope.selectedColorIndex = color;
+};
 
-    $scope.incrementFace = function(amount) {
-    	$scope.selectedFaceIndex += $scope.loopIncrement(amount, $scope.selectedFaceIndex, 3);
-    };
+$scope.incrementFace = function(amount) {
+	$scope.selectedFaceIndex += $scope.loopIncrement(amount, $scope.selectedFaceIndex, 3);
+};
 
-    $scope.incrementBody = function(amount) {
-    	$scope.selectedBodyIndex += $scope.loopIncrement(amount, $scope.selectedBodyIndex, 3);
-    };
+$scope.incrementBody = function(amount) {
+	$scope.selectedBodyIndex += $scope.loopIncrement(amount, $scope.selectedBodyIndex, 3);
+};
 ```
 
 ##### Explanation
@@ -176,7 +176,7 @@ app/views/main.html
 </form>
 ```
 
-### Styles for interface
+##### Styles for interface
 
 app/styles/main.css
 ```
@@ -316,3 +316,105 @@ You'll also need to initialize the SDK with your App Key. Per the Branch Web SDK
 </script>
 ```
 **Be sure to replace `APP-KEY` with the actual app key found in your [Branch dashboard](https://dashboard.branch.io/#/settings)**
+
+##### 5. Integrate the Branch SDK
+
+We're now setup to add more functionality to our app, and integrate the Branch Web SDK. The SDK attaches an instance of itself to the global `window` object as `branch` - which will be accessible inside of the Angular controller.
+
+Lets add a few methods to the Angular controller, after the methods we have already implemented:
+```
+$scope.showEditor = true;
+
+$scope.linkData = {
+		'$color_index': $scope.selectedColorIndex,
+		'$body_index': $scope.selectedBodyIndex,
+		'$face_index': $scope.selectedFaceIndex,
+		'$monster_name': $scope.branchsterName,
+		'$og_title': 'My Branchster: ' + $scope.branchsterName,
+		'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + $scope.selectedColorIndex + $scope.selectedBodyIndex + $scope.selectedFaceIndex + '.png'
+	};
+
+$scope.createBranchster = function() {
+	$scope.showEditor = false;
+	window.branch.banner({
+		title: 'Branchsters',
+		description: 'Open your Branchster in our mobile app!',
+		icon: 'images/icons/icon3.png'
+	}, {
+		channel: 'banner',
+		data: $scope.linkData
+	});
+};
+
+$scope.recreateBranchster = function() {
+	$scope.showEditor = true;
+};
+
+$scope.makeLink = function(channel) {
+	window.branch.link({
+		channel: channel,
+		data: $scope.linkData
+	}, function(err, link) {
+		console.log(err, link);
+	});
+};
+```
+
+##### Explanation
+First, let's add a boolean that will trigger between an editing and a viewing mode in the view, called `showEditor`, that defaults to `true`. We can then bind elements in the interface using `ng-show` and `ng-hide` to easily switch between the two modes. Next, we'll define an object literal of the link data we want to send to Branch, namely, the parameters that make our Branchster.
+
+The next two methods, `createBranchster` and `recreateBranchster` switch between the editing and viewing modes of our interface, toggling `showEditor`, and also showing the universal app banner that is part of the Branch Web SDK. The last function, `makeLink`, takes a single argument of `channel` and will be called by 4 sharing buttons: Facebook, Twitter, Email, and SMS. Until we build a way of sharing the generated links, let's just output them to the console for testing.
+
+##### HTML for interface
+
+Next, we need to update our interface. We need to add `ng-show` bindings to all of the labels, inputs, and buttons that have to do with making a Branchster, and ng-hide bindings to every element that has to do with viewing a Branchster. Additionally, we're adding a 'RECREATE BRANCHSTER' button with an `ng-hide` binding to toggle back to editing mode, and a button group of the four sharing options.
+
+```
+<form>
+	<div class="form-group">
+		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
+		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
+		<input type="text" ng-show="showEditor" class="form-control" id="name" name="name" placeholder="John" ng-model="branchsterName">
+	<div class="form-group">
+		<label for="body" ng-show="showEditor" class="branchsters-heading">Choose face and body</label>
+		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
+			<!-- monster components -->
+			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{selectedFaceIndex}}face.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{selectedBodyIndex}}body.png"></img>
+			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
+			<!-- arrows -->
+			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementFace(-1)"></i>
+			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-show="showEditor" ng-click="incrementFace(1)"></i>
+			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>
+			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-show="showEditor" ng-click="incrementBody(1)"></i>
+		</div>
+	</div>
+	<div ng-show="showEditor" class="form-group">
+		<label for="color" class="branchsters-heading">Pick a color</label>
+		<div class="jumbotron branchsters-square" name="color">
+			<div class="btn-group btn-group-lg" role="group" ng-repeat="color in colors">
+				<button type="button" class="btn btn-default branchsters-color-button" ng-model="color" ng-click="switchColor($index)" ng-style="{'background-color': color}"></button>
+			</div>
+		</div>
+	</div>
+	<div ng-hide="showEditor" class="form-group">
+		<label for="color" class="branchsters-heading">Share Your Monster</label>
+		<div class="jumbotron branchsters-square">
+			<div class="btn-group btn-group-lg" role="group">
+				<button type="button" class="btn btn-default" ng-click="makeLink('email')"><i class="fa fa-envelope branchsters-share-icon"></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('facebook')"><i class="fa fa-facebook branchsters-share-icon"></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('twitter')"><i class="fa fa-twitter branchsters-share-icon"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="form-group branchsters-heading">
+		<button type="button" class="btn btn-default btn-lg btn-success" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
+	</div>
+</form>
+```
+
+This gets us a functional app, that utilizes the Branch Web SDK to generate links that embed all required parameters for sharing users' Branchsters! Next, we'll incorporate the SMSLink method of the Branch Web SDK, and sharing functionality of the Facebooka and Twitter JS SDKs.
+
+##### 6. Sharing functionality
