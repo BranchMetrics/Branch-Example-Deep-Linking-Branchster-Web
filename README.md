@@ -4,6 +4,8 @@ The [Branch Web SDK](https://github.com/BranchMetrics/Web-SDK) is a simple and p
 
 This example is written with [AngularJS](https://angularjs.org/) and [Bootstrap](http://getbootstrap.com/), and the project was started and managed with [Yeoman](http://yeoman.io/). Aren't familiar with AngularJS? That's OK, we just assume you have some JavaScript knowledge. We also have examples with other frameworks, like [React](http://facebook.github.io/react/), on the way. If you're not familiar with Yeoman, that's also OK - it's essentially a three prong bundle which includes: generators for starting projects (over 1000 available now), [Bower](http://bower.io/) for installing and managing dependencies (Including the Branch Web SDK!), and [Grunt](http://gruntjs.com/) for build and development tasks, live reload, etc.
 
+If you're only interested in seeing the example Branch Web SDK integration with Branchsters, skip to step 4.
+
 #### Tools and frameworks used in this tutorial
 - [Sublime Text](http://www.sublimetext.com/)
 - [Node](http://nodejs.org/)
@@ -67,11 +69,11 @@ $ grunt serve
 
 Grunt will serve a live version of your app on port 9000, that automatically refreshses anytime files are changed! Try changing some files to see this working, as it will ome in very useful when we are styling Branhsters.
 
-##### 3. Build the Interface
+##### 3. Modify the Boilerplate generated Angular Boilerplate
 
-First, we need to make some modifications to the boilerplate Yeoman Angular template.
+First, let's some modifications to the boilerplate Yeoman Angular template.
 
-**Let's just list the changes and additions by file and line number**
+**The changes by file and line number**
 
 ##### app/index.html
 - 5: *add* ```<title>Branchsters Web</title>```
@@ -94,13 +96,17 @@ There are also some files we can delete:
 $ rm app/views/about.html app/favicon.ico app/images/yeoman.png app/scripts/controllers/about.js
 
 
-We need to install a few more dependencies. This can easily be accomplished with Bower:
+We'll be using some icons from [Font Awesome](http://fontawesome.io/), which can easily be installed with Bower:
 
 ```
 $ bower install --save fontawesome
 ```
 
-main.js
+##### 4. Build the Branchster interface
+
+First, let's write the JavaScript that will let the user build their Branchster. Insert the following code starting at line 11, just after `.controller('MainCtrl', function ($scope) {`
+
+app/scripts/controllers/main.js
 ```
   	// available branchster colors
     $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
@@ -129,3 +135,160 @@ main.js
     	$scope.selectedBodyIndex += $scope.loopIncrement(amount, $scope.selectedBodyIndex, 3);
     };
 ```
+
+##### Explanation
+This code is fairly straightforward. Essentially, there are 3 indices that control what the Branchster looks like, selectedFaceIndex, selectedBodyIndex, and selectedColorIndex. These three indicies are incremented and decremented by the methods `switchColor`, `incrementFace`, and `incrementBody`. The method `switchColor` accepts one argument, which is the index of the desired color in the `colors` array. This is set by clicking one of the color buttons, as seen in the HTML below. The methods `incrementFace` and `incrementBody` accepts one argument: an increment amount (either a 1, or a -1). This value is passed into `loopIncrement`, which loops through the available bodies and faces, i.e. if the current value of `selectedFaceIndex` is 3 (the maximum - last available face) and an increment amount of +1 is recieved, it will return 0, looping back to the beginning of available faces.
+
+##### HTML for interface
+
+app/views/main.html
+```
+<form>
+	<div class="form-group">
+		<label for="name" class="branchsters-heading">Choose your Monster's name</label>
+		<input type="text" class="form-control" id="name" name="name" placeholder="John">
+	<div class="form-group">
+		<label for="body" class="branchsters-heading">Choose face and body</label>
+		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
+			<!-- monster components -->
+			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{selectedFaceIndex}}face.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{selectedBodyIndex}}body.png"></img>
+			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
+			<!-- arrows -->
+			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-click="incrementFace(-1)"></i>
+			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-click="incrementFace(1)"></i>
+			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-click="incrementBody(-1)"></i>
+			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-click="incrementBody(1)"></i>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="color" class="branchsters-heading">Pick a color</label>
+		<div class="jumbotron branchsters-square" name="color">
+			<div class="btn-group btn-group-lg" role="group" ng-repeat="color in colors">
+				<button type="button" class="btn btn-default" ng-model="color" ng-click="switchColor($index)" ng-style="{'background-color': color}"></button>
+			</div>
+		</div>
+	</div>
+	<div class="form-group branchsters-heading">
+		<button type="button" class="btn btn-default btn-lg btn-success" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+	</div>
+</form>
+```
+
+### Styles for interface
+
+app/styles/main.css
+```
+
+/* Branchsters classes */
+input[type="text"] {
+	color: #555;
+	text-align: center;
+	margin-top: 10px;
+	padding: 0px 30px;
+	font-size: 25px;
+	color: #333;
+	font-family: 'Roboto', Arial;
+	font-weight: 100;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	background: #FFF;
+	height: 40px;
+	box-sizing: border-box;
+}
+
+.header {
+	margin-bottom: 0 !important;
+}
+
+h3 {
+	font-size: 40px;
+	font-weight: 500 !important;
+	color: #c6d6ec !important;
+}
+
+.branchsters-heading {
+	font-family: 'Roboto', Arial;
+	font-size: 28px;
+	color: #000;
+	font-weight: 100;
+	text-align: center;
+	width: 100%;
+	padding-top: 30px;
+}
+
+.branchsters-body-container {
+	  position: relative;
+	  height: 400px;
+}
+
+.branchsters-bodypart {
+	width: 200px;
+	height: 300px;
+	position: absolute;
+	margin-left: -100px;
+}
+
+.branchsters-square {
+	border: 1px solid #CCC;
+	border-bottom: 1px solid #CCC !important;
+	border-style: solid;
+	background-color: #fff;
+	border-radius: 20px !important;
+}
+
+#branchsters-face {
+	z-index: 3;
+}
+
+#branchsters-body {
+	z-index: 2;
+}
+
+.branchsters-bodycolor {
+	z-index: 1;
+}
+
+.branchsters-arrow {
+	cursor: pointer !important;
+}
+
+.branchsters-left-arrow {
+	position: absolute;
+	top: 190px;
+	left: 40px;
+}
+
+.branchsters-right-arrow {
+	position: absolute;
+	top: 190px;
+	right: 40px;
+}
+
+.branchsters-up-arrow {
+	position: absolute;
+	top: 10px;
+}
+
+.branchsters-down-arrow {
+	position: absolute;
+	bottom: 10px;
+}
+
+#branchsters-create-button {
+	top: -20px;
+	position: relative;
+	font-weight: 100;
+	background: #00D0F3;
+	border-color: #00A7C3;
+	text-transform: uppercase;
+	border-radius: 8px;
+	font-family: 'Roboto', Arial;
+	color: #FFF;
+	text-decoration: none;
+	font-size: 25px;
+}
+```
+
+##### 4. Integrate the Branch Web SDK
