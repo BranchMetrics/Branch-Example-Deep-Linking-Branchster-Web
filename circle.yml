@@ -20,4 +20,4 @@ deployment:
   production:
     branch: angular
     commands:
-      - aws s3 sync dist s3://branch-web-sdk/branchster-angular 
+      - AWS_ACCESS_KEY_ID='AKIAJ47AUITIA7OD2XDQ' AWS_SECRET_ACCESS_KEY='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' aws s3 sync dist s3://branch-web-sdk/branchster-angular 
