@@ -20,4 +20,4 @@ deployment:
   production:
     branch: angular
     commands:
-      - aws s3 cp dist s3://branch-web-sdk/branchster-angular --recursive
+      - aws s3 sync dist s3://branch-web-sdk/branchster-angular 
