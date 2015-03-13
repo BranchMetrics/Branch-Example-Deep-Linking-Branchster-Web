@@ -1,30 +1,43 @@
 <form>
 	<div class="form-group">
-		<label for="name" class="branchsters-heading">Choose your Monster's name</label>
-		<input type="text" class="form-control" id="name" name="name" placeholder="John">
+		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
+		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
+		<input type="text" ng-show="showEditor" class="form-control" id="name" name="name" placeholder="John" ng-model="branchsterName">
 	<div class="form-group">
-		<label for="body" class="branchsters-heading">Choose face and body</label>
+		<label for="body" ng-show="showEditor" class="branchsters-heading">Choose face and body</label>
 		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
 			<!-- monster components -->
 			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{selectedFaceIndex}}face.png"></img>
 			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{selectedBodyIndex}}body.png"></img>
 			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
 			<!-- arrows -->
-			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-click="incrementFace(-1)"></i>
-			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-click="incrementFace(1)"></i>
-			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-click="incrementBody(-1)"></i>
-			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-click="incrementBody(1)"></i>
+			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementFace(-1)"></i>
+			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-show="showEditor" ng-click="incrementFace(1)"></i>
+			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>
+			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-show="showEditor" ng-click="incrementBody(1)"></i>
 		</div>
 	</div>
-	<div class="form-group">
+	<div ng-show="showEditor" class="form-group">
 		<label for="color" class="branchsters-heading">Pick a color</label>
 		<div class="jumbotron branchsters-square" name="color">
 			<div class="btn-group btn-group-lg" role="group" ng-repeat="color in colors">
-				<button type="button" class="btn btn-default" ng-model="color" ng-click="switchColor($index)" ng-style="{'background-color': color}"></button>
+				<button type="button" class="btn btn-default branchsters-color-button" ng-model="color" ng-click="switchColor($index)" ng-style="{'background-color': color}"></button>
+			</div>
+		</div>
+	</div>
+	<div ng-hide="showEditor" class="form-group">
+		<label for="color" class="branchsters-heading">Share Your Monster</label>
+		<div class="jumbotron branchsters-square">
+			<div class="btn-group btn-group-lg" role="group">
+				<button type="button" class="btn btn-default" ng-click="makeLink('email')"><i class="fa fa-envelope branchsters-share-icon"></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('facebook')"><i class="fa fa-facebook branchsters-share-icon"></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('twitter')"><i class="fa fa-twitter branchsters-share-icon"></i></button>
 			</div>
 		</div>
 	</div>
 	<div class="form-group branchsters-heading">
-		<button type="button" class="btn btn-default btn-lg btn-success" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
 	</div>
 </form>

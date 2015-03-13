@@ -23,6 +23,8 @@ angular.module('branchsterWebApp')
     $scope.selectedFaceIndex = 0;
     $scope.selectedBodyIndex = 0;
     $scope.selectedColorIndex = 0;
+    $scope.branchsterName = '';
+    $scope.showEditor = true;
 
     $scope.switchColor = function(color) {
     	$scope.selectedColorIndex = color;
@@ -35,4 +37,40 @@ angular.module('branchsterWebApp')
     $scope.incrementBody = function(amount) {
     	$scope.selectedBodyIndex += $scope.loopIncrement(amount, $scope.selectedBodyIndex, 3);
     };
-  });
+
+    //  new shit
+
+    $scope.recreateBranchster = function() {
+    	$scope.showEditor = true;
+    };
+
+    $scope.linkData = {
+			'$color_index': $scope.selectedColorIndex,
+			'$body_index': $scope.selectedBodyIndex,
+			'$face_index': $scope.selectedFaceIndex,
+			'$monster_name': $scope.branchsterName,
+			'$og_title': 'My Branchster: ' + $scope.branchsterName,
+			'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + $scope.selectedColorIndex + $scope.selectedBodyIndex + $scope.selectedFaceIndex + '.png'
+		};
+
+    $scope.createBranchster = function() {
+		$scope.showEditor = false;
+		window.branch.banner({
+			title: 'Branchsters',
+			description: 'Open your Branchster in our mobile app!',
+			icon: 'images/icons/icon3.png'
+		}, {
+			channel: 'banner',
+			data: $scope.linkData
+		});
+    };
+
+    $scope.makeLink = function(channel) {
+		window.branch.link({
+			channel: channel,
+			data: $scope.linkData
+		}, function(err, link) {
+			console.log(err, link);
+		});
+    };
+});

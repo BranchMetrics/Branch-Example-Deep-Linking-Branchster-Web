@@ -25,7 +25,6 @@ body {
 }
 
 /* Branchsters classes */
-
 input[type="text"] {
 	color: #555;
 	text-align: center;
@@ -95,6 +94,10 @@ h3 {
 	z-index: 1;
 }
 
+.branchsters-color-button {
+	margin-right: 15px;
+}
+
 .branchsters-arrow {
 	cursor: pointer !important;
 }
@@ -119,6 +122,11 @@ h3 {
 .branchsters-down-arrow {
 	position: absolute;
 	bottom: 10px;
+}
+
+.branchsters-share-icon {
+	vertical-align: top;
+	margin-left: -8px;
 }
 
 #branchsters-create-button {
@@ -162,7 +170,6 @@ h3 {
   padding: 14px 24px;
   height: 50px;
   width: 50px;
-  margin-right: 15px;
 }
 
 /* Supporting marketing content */
