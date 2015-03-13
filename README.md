@@ -315,4 +315,4 @@ You'll also need to initialize the SDK with your App Key. Per the Branch Web SDK
 	});
 </script>
 ```
-**Be sure to replace `APP-KEY` with the actual app key found in your [Branch dashboard](https://dashboard.branch.io/#/settings)
+**Be sure to replace `APP-KEY` with the actual app key found in your [Branch dashboard](https://dashboard.branch.io/#/settings)**
