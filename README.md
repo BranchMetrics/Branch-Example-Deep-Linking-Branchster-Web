@@ -292,4 +292,27 @@ h3 {
 }
 ```
 
-##### 4. Integrate the Branch Web SDK
+##### 4. Install the Branch Web SDK
+
+Once again, we're going to make use of Bower to install the Branch Web SDK.
+
+Let's go grab it with:
+```
+$ bower install --save branch-web-sdk
+```
+This will automatically add a script tag to the bottom of your index.html file:
+```
+<script src="bower_components/branch-web-sdk/dist/build.js"></script>
+```
+
+You'll also need to initialize the SDK with your App Key. Per the Branch Web SDK instructions, include this tag at the bottom of your index.html, after the `<script>` tag Bower added:
+```
+<script type="text/javascript">
+	(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-v1.2.0.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"init data setIdentity logout track link sendSMS referrals credits redeem banner".split(" "),0);
+
+	branch.init('APP-KEY', function(err, data) {
+	    // callback to handle err or data
+	});
+</script>
+```
+**Be sure to replace `APP-KEY` with the actual app key found in your [Branch dashboard](https://dashboard.branch.io/#/settings)
