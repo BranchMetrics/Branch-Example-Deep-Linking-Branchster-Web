@@ -1,0 +1,16 @@
+---
+machine:
+  node:
+    version: 0.10.31
+
+dependencies:
+  cache_directories:
+    - "~/nvm/v0.10.31"
+  post:
+    - npm install && npm install bower grunt 
+    - bower install
+
+test:
+  override:
+    - grunt
+
