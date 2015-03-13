@@ -21,4 +21,4 @@ deployment:
   production:
     branch: angular
     commands:
-      - s3cp -r dist/* s3://branch-web-sdk/branchster-angular/
+      - bin/s3cp -r dist/* s3://branch-web-sdk/branchster-angular/
