@@ -17,6 +17,7 @@ test:
     - grunt build
 
 deployment:
-  angular:
+  production:
+    branch: angular
     commands:
-      - AWS_ACCESS_KEY_ID='AKIAJ47AUITIA7OD2XDQ' AWS_SECRET_ACCESS_KEY='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' aws s3 cp dist s3://branch-web-sdk/branchster-angular --recursive
+      - aws s3 cp dist s3://branch-web-sdk/branchster-angular --recursive
