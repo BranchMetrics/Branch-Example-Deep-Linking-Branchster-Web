@@ -61,7 +61,7 @@ Would you like to include Bootstrap? Yes
 
 And now a bunch of magic will happen (this is where you see the real value of Yeoman). Yeoman will automatically setup a directory scaffolding, and install the proper npm and bower packages! This is a great point to go grab a cub of coffee, as it will take a few minutes to install everything.
 
-##### Livereload
+##### Live Reload
 Now that Yeoman has setup the scaffolding for a basic Angular app, and setup some basic grunt tasks, run the following command:
 ```
 $ grunt serve
@@ -94,6 +94,7 @@ First, let's some modifications to the boilerplate Yeoman Angular template.
 There are also some files we can delete:
 ```
 $ rm app/views/about.html app/favicon.ico app/images/yeoman.png app/scripts/controllers/about.js
+```
 
 
 We'll be using some icons from [Font Awesome](http://fontawesome.io/), which can easily be installed with Bower:
