@@ -3,7 +3,7 @@
 		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
 		<input type="text" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
-		<p class="lead" ng-bind="description"></p>
+		<p class="lead" id="branchsters-description" ng-bind="description"></p>
 	<div class="form-group">
 		<label for="body" ng-show="showEditor" class="branchsters-heading">Choose face and body</label>
 		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
@@ -27,6 +27,7 @@
 		</div>
 	</div>
 	<div ng-hide="showEditor" class="form-group">
+		<p class="lead" ng-hide="showEditor" id="branchsters-display-link" ng-bind="displayLink"></p>
 		<label for="color" class="branchsters-heading">Share Your Monster</label>
 		<div class="jumbotron branchsters-square">
 			<div class="btn-group btn-group-lg" role="group">
@@ -37,8 +38,12 @@
 				<button type="button" class="btn btn-default" ng-click="makeLink('pinterest')"><i class="fa fa-pinterest branchsters-share-icon"></i></button>
 				<button type="button" class="btn btn-default" ng-click="makeLink('clipboard')"><i class="fa fa-clipboard branchsters-share-icon"></i></button>
 			</div>
-			<input type="text" ng-show="showSMSInput" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
-			<button type="button" ng-show="showSMSInput" ng-disabled="!branchLink" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
+			<!--- SMS -->
+			<input type="text" ng-show="showSMS" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
+			<button type="button" ng-show="showSMS" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
+
+			<!-- Clipboard -->
+			<input type="text" ng-show="showClipboard" class="form-control" ng-model="clipboardLink" ng-click="onTextClick($event)" readonly="readonly">
 		</div>
 	</div>
 	<div class="form-group branchsters-heading">

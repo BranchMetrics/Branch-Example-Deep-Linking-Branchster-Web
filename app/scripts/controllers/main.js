@@ -40,6 +40,8 @@ angular.module('branchsterWebApp')
 		return $scope.descriptions[$scope.selectedFaceIndex].replace('$name', $scope.branchsterName);
 	};
 
+	// ============================================================
+
     // selected branchster on load
     $scope.selectedFaceIndex = 0;
     $scope.selectedBodyIndex = 0;
@@ -66,13 +68,15 @@ angular.module('branchsterWebApp')
     $scope.showEditor = true;
 
     $scope.linkData = {
-			'$color_index': $scope.selectedColorIndex,
-			'$body_index': $scope.selectedBodyIndex,
-			'$face_index': $scope.selectedFaceIndex,
-			'$monster_name': $scope.branchsterName,
-			'$og_title': 'My Branchster: ' + $scope.branchsterName,
-			'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + $scope.selectedColorIndex + $scope.selectedBodyIndex + $scope.selectedFaceIndex + '.png'
-		};
+		'color_index': $scope.selectedColorIndex,
+		'body_index': $scope.selectedBodyIndex,
+		'face_index': $scope.selectedFaceIndex,
+		'monster_name': $scope.branchsterName,
+		'monster': true,
+		'$og_title': 'My Branchster: ' + $scope.branchsterName,
+		'$og_description': $scope.description,
+		'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + $scope.selectedColorIndex + $scope.selectedBodyIndex + $scope.selectedFaceIndex + '.png'
+	};
 
     $scope.createBranchster = function() {
 		$scope.showEditor = false;
@@ -80,11 +84,15 @@ angular.module('branchsterWebApp')
 		window.branch.banner({
 			title: 'Branchsters',
 			description: 'Open your Branchster in our mobile app!',
+			showDesktop: false,
 			icon: 'images/icons/icon3.png'
 		}, {
 			channel: 'banner',
+			feature: 'share',
+			tags: [ 'desktop_creator' ],
 			data: $scope.linkData
 		});
+		$scope.makeLink('display');
     };
 
     $scope.recreateBranchster = function() {
@@ -92,16 +100,25 @@ angular.module('branchsterWebApp')
     };
 
     $scope.makeLink = function(channel) {
-    	if (channel === 'sms') {
-				$scope.showSMSInput = true;
-			} else {
-				$scope.showSMSInput = false;
-			}
+    	$scope.resetShows();
 		window.branch.link({
 			channel: channel,
+			feature: 'share',
+			tags: [ 'desktop_creator' ],
 			data: $scope.linkData
 		}, function(err, link) {
-			$scope.branchLink = link;
+			if (channel === 'sms') {
+				$scope.showSMS = true;
+				$scope.smsLink = link;
+			} 
+			else if (channel === 'display') {
+				$scope.displayLink = link;
+			}
+			else if (channel === 'clipboard') {
+				$scope.showClipboard = true;
+				$scope.clipboardLink = link;
+			}
+			
 			$scope.$apply();
 		});
     };
@@ -109,15 +126,27 @@ angular.module('branchsterWebApp')
     // Step 6
     // ============================================================
 
-    $scope.showSMSInput = false;
-
     $scope.phone = '';
 
-    $scope.branchLink = '';
+    // Links
+    $scope.smsLink = '';
+    $scope.displayLink = '';
+    $scope.clipboardLink = '';
+
+    $scope.resetShows = function() {
+    	$scope.showSMS = false;
+	    $scope.showClipboard = false;
+    }
 
     $scope.sendSMS  =function() {
 		window.branch.sendSMS(
 			$scope.phone,
 			$scope.linkData);
     };
+
+    // ============================================================
+
+	$scope.onTextClick = function ($event) {
+		$event.target.select();
+	};
 });

@@ -90,8 +90,17 @@ h3 {
 	z-index: 3;
 }
 
+#branchsters-description {
+	height: 115px;
+}
+
 #branchsters-body {
 	z-index: 2;
+}
+
+#branchsters-display-link {
+	text-align: center;
+	height: 30px;
 }
 
 .branchsters-bodycolor {
