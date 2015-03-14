@@ -421,3 +421,7 @@ app/views/main.html
 This gets us a functional app, that utilizes the Branch Web SDK to generate links that embed all required parameters for sharing users' Branchsters! Next, we'll incorporate the SMSLink method of the Branch Web SDK, and sharing functionality of the Facebooka and Twitter JS SDKs.
 
 ##### 6. Sharing functionality
+
+```
+$ bower install --save angular-socialshare
+```

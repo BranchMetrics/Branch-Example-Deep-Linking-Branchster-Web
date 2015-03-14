@@ -8,7 +8,10 @@
  * Controller of the branchsterWebApp
  */
 angular.module('branchsterWebApp')
-  .controller('MainCtrl', function ($scope) {
+	.config(function(FacebookProvider) {
+		 FacebookProvider.init('348703352001630');
+	})
+  .controller('MainCtrl', function ($scope, Facebook) {
   	// Step 3
   	// ============================================================
 
@@ -118,6 +121,17 @@ angular.module('branchsterWebApp')
 				$scope.showClipboard = true;
 				$scope.clipboardLink = link;
 			}
+			else if (channel === 'facebook') {
+				$scope.facebookLink = link;
+				Facebook.ui({
+					method: 'share_open_graph',
+					/*jshint camelcase: false */
+					action_type: 'og.likes',
+					action_properties: JSON.stringify({
+						object: link,
+					}),
+				}, function(response){ console.log(response); });
+			}
 			
 			$scope.$apply();
 		});
@@ -136,7 +150,7 @@ angular.module('branchsterWebApp')
     $scope.resetShows = function() {
     	$scope.showSMS = false;
 	    $scope.showClipboard = false;
-    }
+    };
 
     $scope.sendSMS  =function() {
 		window.branch.sendSMS(

@@ -14,7 +14,8 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngTouch'
+    'ngTouch',
+    'facebook'
   ])
   .config(function ($routeProvider) {
     $routeProvider
