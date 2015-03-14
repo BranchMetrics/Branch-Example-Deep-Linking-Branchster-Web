@@ -425,3 +425,8 @@ This gets us a functional app, that utilizes the Branch Web SDK to generate link
 ```
 $ bower install --save angular-socialshare
 ```
+
+app.js
+```
+dependency:     'facebook'
+```
