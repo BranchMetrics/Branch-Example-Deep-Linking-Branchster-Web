@@ -82,6 +82,10 @@ h3 {
 	border-radius: 20px !important;
 }
 
+#brachsters-name {
+	margin-bottom: 20px;
+}
+
 #branchsters-face {
 	z-index: 3;
 }
@@ -129,18 +133,28 @@ h3 {
 	margin-left: -8px;
 }
 
-#branchsters-create-button {
-	top: -20px;
-	position: relative;
-	font-weight: 100;
-	background: #00D0F3;
-	border-color: #00A7C3;
+.branchsters-button {
 	text-transform: uppercase;
 	border-radius: 8px;
 	font-family: 'Roboto', Arial;
 	color: #FFF;
 	text-decoration: none;
 	font-size: 25px;
+	font-weight: 100;
+}
+
+#branchsters-create-button {
+	top: -20px;
+	position: relative;
+	
+	background: #00D0F3;
+	border-color: #00A7C3;
+}
+
+#branchsters-sms-send {
+	width: initial;
+	padding-top: 8px;
+	margin-top: 10px;
 }
 
 /* Custom page footer */

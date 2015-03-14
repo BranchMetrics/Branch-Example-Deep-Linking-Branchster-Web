@@ -369,7 +369,7 @@ The next two methods, `createBranchster` and `recreateBranchster` switch between
 
 ##### HTML for interface
 
-Next, we need to update our interface. We need to add `ng-show` bindings to all of the labels, inputs, and buttons that have to do with making a Branchster, and ng-hide bindings to every element that has to do with viewing a Branchster. Additionally, we're adding a 'RECREATE BRANCHSTER' button with an `ng-hide` binding to toggle back to editing mode, and a button group of the four sharing options.
+Next, we need to update our interface. We need to add `ng-show` directives to all of the labels, inputs, and buttons that have to do with making a Branchster, and ng-hide directives to every element that has to do with viewing a Branchster. Additionally, we're adding a 'RECREATE BRANCHSTER' button with an `ng-hide` directive to toggle back to editing mode, and a button group of the four sharing options.
 
 app/views/main.html
 ```

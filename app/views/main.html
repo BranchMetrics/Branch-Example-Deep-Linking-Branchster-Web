@@ -2,7 +2,8 @@
 	<div class="form-group">
 		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
-		<input type="text" ng-show="showEditor" class="form-control" id="name" name="name" placeholder="John" ng-model="branchsterName">
+		<input type="text" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
+		<p class="lead" ng-bind="description"></p>
 	<div class="form-group">
 		<label for="body" ng-show="showEditor" class="branchsters-heading">Choose face and body</label>
 		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
@@ -11,10 +12,10 @@
 			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{selectedBodyIndex}}body.png"></img>
 			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
 			<!-- arrows -->
-			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementFace(-1)"></i>
-			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-show="showEditor" ng-click="incrementFace(1)"></i>
-			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>
-			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-show="showEditor" ng-click="incrementBody(1)"></i>
+			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>
+			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-show="showEditor" ng-click="incrementBody(1)"></i>
+			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-show="showEditor" ng-click="incrementFace(-1)"></i>
+			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-show="showEditor" ng-click="incrementFace(1)"></i>
 		</div>
 	</div>
 	<div ng-show="showEditor" class="form-group">
@@ -33,11 +34,15 @@
 				<button type="button" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
 				<button type="button" class="btn btn-default" ng-click="makeLink('facebook')"><i class="fa fa-facebook branchsters-share-icon"></i></button>
 				<button type="button" class="btn btn-default" ng-click="makeLink('twitter')"><i class="fa fa-twitter branchsters-share-icon"></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('pinterest')"><i class="fa fa-pinterest branchsters-share-icon"></i></button>
+				<button type="button" class="btn btn-default" ng-click="makeLink('clipboard')"><i class="fa fa-clipboard branchsters-share-icon"></i></button>
 			</div>
+			<input type="text" ng-show="showSMSInput" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
+			<button type="button" ng-show="showSMSInput" ng-disabled="!branchLink" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
 		</div>
 	</div>
 	<div class="form-group branchsters-heading">
-		<button type="button" class="btn btn-default btn-lg btn-success" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
-		<button type="button" class="btn btn-default btn-lg btn-success" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
 	</div>
 </form>
