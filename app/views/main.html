@@ -26,7 +26,7 @@
 			</div>
 		</div>
 	</div>
-	<div ng-hide="showEditor" class="form-group">
+	<div ng-hide="showEditor" class="form-group"  ng-class="{ 'has-error':smsError }">
 		<p class="lead" ng-hide="showEditor" id="branchsters-display-link" ng-bind="displayLink"></p>
 		<label for="color" class="branchsters-heading">Share Your Monster</label>
 		<div class="jumbotron branchsters-square">
@@ -40,7 +40,8 @@
 			</div>
 			<!--- SMS -->
 			<input type="text" ng-show="showSMS" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
-			<button type="button" ng-show="showSMS" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
+			<button type="button" ng-show="showSMS" ng-disabled="smsSending" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
+			<span id="branchsters-sms-sent" ng-show="showSMSSent">SMS Sent!</span>
 
 			<!-- Clipboard -->
 			<input type="text" ng-show="showClipboard" class="form-control" ng-model="clipboardLink" ng-click="onTextClick($event)" readonly="readonly">

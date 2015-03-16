@@ -166,6 +166,13 @@ h3 {
 	margin-top: 10px;
 }
 
+#branchsters-sms-sent {
+	display: block;
+	margin-top: 10px;
+	color: green;
+	font-size: 18px;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;

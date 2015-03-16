@@ -76,6 +76,7 @@ angular.module('branchsterWebApp')
 		'face_index': $scope.selectedFaceIndex,
 		'monster_name': $scope.branchsterName,
 		'monster': true,
+		'$desktop_url': 'http://cdn.branch.io/branchster-angular/',
 		'$og_title': 'My Branchster: ' + $scope.branchsterName,
 		'$og_description': $scope.description,
 		'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + $scope.selectedColorIndex + $scope.selectedBodyIndex + $scope.selectedFaceIndex + '.png'
@@ -132,14 +133,12 @@ angular.module('branchsterWebApp')
 					}),
 				}, function(response){ console.log(response); });
 			}
-			
 			$scope.$apply();
 		});
     };
 
     // Step 6
     // ============================================================
-
     $scope.phone = '';
 
     // Links
@@ -153,9 +152,41 @@ angular.module('branchsterWebApp')
     };
 
     $scope.sendSMS  =function() {
-		window.branch.sendSMS(
+    	$scope.smsError = false;
+    	$scope.smsSending = true;
+    	if ($scope.phone) {
+    		window.branch.sendSMS(
 			$scope.phone,
-			$scope.linkData);
+			{ data: $scope.linkData },
+			{
+				/*jshint camelcase: false */
+				make_new_link: false
+			},
+			function(err) {
+				$scope.smsSending = false;
+				if (err) {
+					$scope.smsError = true;
+				}
+				else {
+					$scope.showSMSSent = true;
+					
+					setTimeout(function() {
+						$scope.$apply();
+						$scope.showSMSSent = false;
+					}, 3000);
+				}
+				$scope.$apply();
+			});
+    	}
+    	else {
+    		$scope.smsError = true;
+    		$scope.smsSending = false;
+    		setTimeout(function() {
+				$scope.smsError = false;
+				$scope.$apply();
+			}, 3000);
+    	}
+    	$scope.$apply();
     };
 
     // ============================================================
