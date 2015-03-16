@@ -133,6 +133,17 @@ angular.module('branchsterWebApp')
 					}
 				);
 			}
+			else if (channel === 'pinterest') {
+				$scope.popup(
+					'http://pinterest.com/pin/create/link/?url=' + link,
+					{
+						width: 450,
+						height: 450,
+						name:'pinterest',
+
+					}
+				);
+			}
 			else if (channel === 'facebook') {
 				$scope.facebookLink = link;
 				Facebook.ui({
