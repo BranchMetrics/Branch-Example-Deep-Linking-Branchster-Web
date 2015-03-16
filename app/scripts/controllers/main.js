@@ -122,6 +122,17 @@ angular.module('branchsterWebApp')
 				$scope.showClipboard = true;
 				$scope.clipboardLink = link;
 			}
+			else if (channel === 'twitter') {
+				$scope.popup(
+					'https://twitter.com/intent/tweet?text=Check%20out%20my%20Branchster%20name%20' + $scope.branchsterName + '&url=' + link + '&original_referer=',
+					{
+						width: 450,
+						height: 450,
+						name:'twitter',
+
+					}
+				);
+			}
 			else if (channel === 'facebook') {
 				$scope.facebookLink = link;
 				Facebook.ui({
@@ -175,7 +186,6 @@ angular.module('branchsterWebApp')
 						$scope.showSMSSent = false;
 					}, 3000);
 				}
-				$scope.$apply();
 			});
     	}
     	else {
@@ -193,5 +203,17 @@ angular.module('branchsterWebApp')
 
 	$scope.onTextClick = function ($event) {
 		$event.target.select();
+	};
+
+	$scope.popup = function(url, popupOptions) {
+		var left   = (window.innerWidth  - popupOptions.width)  / 2,
+		top    = (window.innerHeight - popupOptions.height) / 2,
+		options   = 'status=1' +
+			',width='  + popupOptions.width  +
+			',height=' + popupOptions.height +
+			',top='    + top    +
+			',left='   + left;
+
+		window.open(url, popupOptions.name, options);
 	};
 });
