@@ -18,6 +18,8 @@ angular.module('branchsterWebApp')
   	// available branchster colors
     $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
 
+    $scope.interfaceWait = false;
+
     // default name
     var defaultName = 'Bingles Jingleheimer';
 
@@ -105,6 +107,7 @@ angular.module('branchsterWebApp')
 
     $scope.makeLink = function(channel) {
     	$scope.resetShows();
+    	$scope.interfaceWait = true;
 		window.branch.link({
 			channel: channel,
 			feature: 'share',
@@ -153,6 +156,7 @@ angular.module('branchsterWebApp')
 					}),
 				}, function(response){ console.log(response); });
 			}
+			$scope.interfaceWait = false;
 			$scope.$apply();
 		});
     };
@@ -173,7 +177,7 @@ angular.module('branchsterWebApp')
 
     $scope.sendSMS  =function() {
     	$scope.smsError = false;
-    	$scope.smsSending = true;
+    	$scope.interfaceWait = true;
     	if ($scope.phone) {
     		window.branch.sendSMS(
 			$scope.phone,
@@ -183,7 +187,7 @@ angular.module('branchsterWebApp')
 				make_new_link: false
 			},
 			function(err) {
-				$scope.smsSending = false;
+				$scope.interfaceWait = false;
 				if (err) {
 					$scope.smsError = true;
 				}
@@ -199,7 +203,7 @@ angular.module('branchsterWebApp')
     	}
     	else {
     		$scope.smsError = true;
-    		$scope.smsSending = false;
+    		$scope.interfaceWait = false;
     		setTimeout(function() {
 				$scope.smsError = false;
 				$scope.$apply();
