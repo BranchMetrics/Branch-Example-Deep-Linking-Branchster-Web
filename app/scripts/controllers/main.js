@@ -12,81 +12,70 @@ angular.module('branchsterWebApp')
 		 FacebookProvider.init('348703352001630');
 	})
   .controller('MainCtrl', ['$scope', 'Facebook', 'utilities', function ($scope, Facebook, utilities) {
-  	// Step 3
-  	// ============================================================
 
-  	// available branchster colors
-    $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
+  	$scope.init = function() {
+  		// available branchster colors
+	    $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
 
-    $scope.interfaceWait = false;
+	    // descriptions of Branchster for each face
+	    $scope.descriptions = [
+			'$name is a social butterfly. She’s a loyal friend, ready to give you a piggyback ride at a moments notice or greet you with a face lick and wiggle.',
+			'Creative and contagiously happy, $name has boundless energy and an appetite for learning about new things. He is vivacious and popular, and is always ready for the next adventure.',
+			'$name prefers to work alone and is impatient with hierarchies and politics.  Although he’s not particularly social, he has a razor sharp wit (and claws), and is actually very fun to be around.',
+			'Independent and ferocious, $name experiences life at 100 mph. Not interested in maintaining order, he is a fierce individual who is highly effective, successful, and incredibly powerful.',
+			'Peaceful, shy, and easygoing, $name takes things at his own pace and lives moment to moment. She is considerate, pleasant, caring, and introspective. She’s a bit nerdy and quiet -- but that’s why everyone loves him.'
+		];
 
-    // default name
-    var defaultName = 'Bingles Jingleheimer';
+		// default name
+	    $scope.defaultName = 'Bingles Jingleheimer';
 
-    // loops through indices for the body and face, between 0 and max
-    $scope.loopIncrement = function(amount, index, max) {
-    	amount = (index === 0 && amount === -1) ? max : amount;
-		amount = (index === max && amount === 1) ? -1 * max : amount;
-		return amount;
-    };
+		// selected branchster on load
+	    $scope.selectedFaceIndex = 0;
+	    $scope.selectedBodyIndex = 0;
+	    $scope.selectedColorIndex = 0;
+	    $scope.branchsterName = $scope.defaultName;
+	    $scope.description = utilities.getDescription($scope);
 
-    // Step 7
-    // ============================================================
+	    // Links
+	    $scope.phone = '';
+	    $scope.smsLink = '';
+	    $scope.displayLink = '';
+	    $scope.clipboardLink = '';
 
-	$scope.descriptions = [
-		'$name is a social butterfly. She’s a loyal friend, ready to give you a piggyback ride at a moments notice or greet you with a face lick and wiggle.',
-		'Creative and contagiously happy, $name has boundless energy and an appetite for learning about new things. He is vivacious and popular, and is always ready for the next adventure.',
-		'$name prefers to work alone and is impatient with hierarchies and politics.  Although he’s not particularly social, he has a razor sharp wit (and claws), and is actually very fun to be around.',
-		'Independent and ferocious, $name experiences life at 100 mph. Not interested in maintaining order, he is a fierce individual who is highly effective, successful, and incredibly powerful.',
-		'Peaceful, shy, and easygoing, $name takes things at his own pace and lives moment to moment. She is considerate, pleasant, caring, and introspective. She’s a bit nerdy and quiet -- but that’s why everyone loves him.'
-	];
+	    // Interface
+        $scope.interfaceResetTime = 3000;
+  	};
 
-	$scope.getDescription = function() {
-		return $scope.descriptions[$scope.selectedFaceIndex].replace('$name', $scope.branchsterName);
-	};
+  	$scope.load = function(data) {
+  		// Interface
+  		$scope.showEditor = true;
 
-	// ============================================================
-
-    // selected branchster on load
-    $scope.selectedFaceIndex = 0;
-    $scope.selectedBodyIndex = 0;
-    $scope.selectedColorIndex = 0;
-    $scope.branchsterName = defaultName;
-    $scope.description = $scope.getDescription();
+  		// Load Branchster
+  		/*jshint -W069 */
+  		$scope.selectedFaceIndex = data['face_index'] || $scope.selectedFaceIndex;
+	    $scope.selectedBodyIndex = data['body_index'] || $scope.selectedBodyIndex;
+	    $scope.selectedColorIndex = data['color_index'] || $scope.selectedColorIndex;
+		$scope.branchsterName = data['monster_name'] || $scope.branchsterName;
+		/*jshint +W069 */
+  	};
 
     $scope.switchColor = function(color) {
     	$scope.selectedColorIndex = color;
     };
 
     $scope.incrementFace = function(amount) {
-    	$scope.selectedFaceIndex += $scope.loopIncrement(amount, $scope.selectedFaceIndex, 4);
-    	$scope.description = $scope.getDescription();
+    	$scope.selectedFaceIndex += utilities.loopIncrement(amount, $scope.selectedFaceIndex, 4);
+    	$scope.description = utilities.getDescription($scope);
     };
 
     $scope.incrementBody = function(amount) {
-    	$scope.selectedBodyIndex += $scope.loopIncrement(amount, $scope.selectedBodyIndex, 4);
+    	$scope.selectedBodyIndex += utilities.loopIncrement(amount, $scope.selectedBodyIndex, 4);
     };
 
-    // Step 5
-    // ============================================================
-
-    $scope.showEditor = true;
-
-    $scope.linkData = {
-		'color_index': $scope.selectedColorIndex,
-		'body_index': $scope.selectedBodyIndex,
-		'face_index': $scope.selectedFaceIndex,
-		'monster_name': $scope.branchsterName,
-		'monster': true,
-		'$desktop_url': 'http://cdn.branch.io/branchster-angular/',
-		'$og_title': 'My Branchster: ' + $scope.branchsterName,
-		'$og_description': $scope.description,
-		'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + $scope.selectedColorIndex + $scope.selectedBodyIndex + $scope.selectedFaceIndex + '.png'
-	};
-
+    // Public
     $scope.createBranchster = function() {
 		$scope.showEditor = false;
-		$scope.branchsterName = $scope.branchsterName || defaultName;
+		$scope.branchsterName = $scope.branchsterName || $scope.defaultName;
 		window.branch.banner({
 			title: 'Branchsters',
 			description: 'Open your Branchster in our mobile app!',
@@ -96,7 +85,7 @@ angular.module('branchsterWebApp')
 			channel: 'banner',
 			feature: 'share',
 			tags: [ 'desktop_creator' ],
-			data: $scope.linkData
+			data: utilities.linkData($scope)
 		});
 		$scope.makeLink('display');
     };
@@ -105,14 +94,18 @@ angular.module('branchsterWebApp')
     	$scope.showEditor = true;
     };
 
+	$scope.onTextClick = function ($event) {
+		$event.target.select();
+	};
+
     $scope.makeLink = function(channel) {
-    	$scope.resetShows();
+    	utilities.resetShows($scope);
     	$scope.interfaceWait = true;
 		window.branch.link({
 			channel: channel,
 			feature: 'share',
 			tags: [ 'desktop_creator' ],
-			data: $scope.linkData
+			data: utilities.linkData($scope)
 		}, function(err, link) {
 			if (channel === 'sms') {
 				$scope.showSMS = true;
@@ -161,27 +154,13 @@ angular.module('branchsterWebApp')
 		});
     };
 
-    // Step 6
-    // ============================================================
-    $scope.phone = '';
-
-    // Links
-    $scope.smsLink = '';
-    $scope.displayLink = '';
-    $scope.clipboardLink = '';
-
-    $scope.resetShows = function() {
-    	$scope.showSMS = false;
-	    $scope.showClipboard = false;
-    };
-
     $scope.sendSMS  =function() {
     	$scope.smsError = false;
     	$scope.interfaceWait = true;
     	if ($scope.phone) {
     		window.branch.sendSMS(
 			$scope.phone,
-			{ data: $scope.linkData },
+			{ data: utilities.linkData($scope) },
 			{
 				/*jshint camelcase: false */
 				make_new_link: false
@@ -197,7 +176,7 @@ angular.module('branchsterWebApp')
 					setTimeout(function() {
 						$scope.$apply();
 						$scope.showSMSSent = false;
-					}, 3000);
+					}, $scope.interfaceResetTime);
 				}
 			});
     	}
@@ -207,15 +186,16 @@ angular.module('branchsterWebApp')
     		setTimeout(function() {
 				$scope.smsError = false;
 				$scope.$apply();
-			}, 3000);
+			}, $scope.interfaceResetTime);
     	}
     	$scope.$apply();
     };
 
-    // ============================================================
-
-	$scope.onTextClick = function ($event) {
-		$event.target.select();
-	};
-
+    // Inititate the app
+    $scope.init();
+    window.branch.init('36930236817866882', function(err, data) {
+    	if (!err) {
+    		$scope.load(data);
+    	}
+	});
 }]);

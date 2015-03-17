@@ -20,4 +20,34 @@ angular.module('branchsterWebApp')
 
 			window.open(url, popupOptions.name, options);
 		};
+
+		// loops through indices for the body and face, between 0 and max
+		this.loopIncrement = function(amount, index, max) {
+	    	amount = (index === 0 && amount === -1) ? max : amount;
+			amount = (index === max && amount === 1) ? -1 * max : amount;
+			return amount;
+	    };
+
+	    this.linkData = function(scope) {
+	    	return {
+				'color_index': scope.selectedColorIndex,
+				'body_index': scope.selectedBodyIndex,
+				'face_index': scope.selectedFaceIndex,
+				'monster_name': scope.branchsterName,
+				'monster': true,
+				'$desktop_url': 'http://cdn.branch.io/branchster-angular/',
+				'$og_title': 'My Branchster: ' + scope.branchsterName,
+				'$og_description': scope.description,
+				'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + scope.selectedColorIndex + scope.selectedBodyIndex + scope.selectedFaceIndex + '.png'
+			};
+		};
+
+		this.resetShows = function(scope) {
+	    	scope.showSMS = false;
+		    scope.showClipboard = false;
+	    };
+
+	    this.getDescription = function(scope) {
+			return scope.descriptions[scope.selectedFaceIndex].replace('$name', scope.branchsterName);
+		};
 	});
