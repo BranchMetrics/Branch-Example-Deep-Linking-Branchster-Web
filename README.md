@@ -141,7 +141,7 @@ $scope.incrementBody = function(amount) {
 ```
 
 ##### Explanation
-This code is fairly straightforward. Essentially, there are 3 indices that control what the Branchster looks like, selectedFaceIndex, selectedBodyIndex, and selectedColorIndex. These three indicies are incremented and decremented by the methods `switchColor`, `incrementFace`, and `incrementBody`. The method `switchColor` accepts one argument, which is the index of the desired color in the `colors` array. This is set by clicking one of the color buttons, as seen in the HTML below. The methods `incrementFace` and `incrementBody` accepts one argument: an increment amount (either a 1, or a -1). This value is passed into `loopIncrement`, which loops through the available bodies and faces, i.e. if the current value of `selectedFaceIndex` is 3 (the maximum - last available face) and an increment amount of +1 is recieved, it will return 0, looping back to the beginning of available faces.
+This code is fairly straightforward. Essentially, there are 3 indices that control what the Branchster looks like, `selectedFaceIndex`, `selectedBodyIndex`, and `selectedColorIndex`. These three indicies are incremented and decremented by the methods `switchColor`, `incrementFace`, and `incrementBody`. The method `switchColor` accepts one argument, which is the index of the desired color in the `colors` array. This is set by clicking one of the color buttons, as seen in the HTML below. The methods `incrementFace` and `incrementBody` accepts one argument: an increment amount (either a 1, or a -1). This value is passed into `loopIncrement`, which loops through the available bodies and faces, i.e. if the current value of `selectedFaceIndex` is 3 (the maximum - last available face) and an increment amount of +1 is recieved, it will return 0, looping back to the beginning of available faces.
 
 ##### HTML for interface
 
@@ -242,16 +242,34 @@ h3 {
 	border-radius: 20px !important;
 }
 
+#brachsters-name {
+	margin-bottom: 20px;
+}
+
 #branchsters-face {
 	z-index: 3;
+}
+
+#branchsters-description {
+	height: 115px;
 }
 
 #branchsters-body {
 	z-index: 2;
 }
 
+#branchsters-display-link {
+	text-align: center;
+	height: 30px;
+}
+
 .branchsters-bodycolor {
 	z-index: 1;
+}
+
+.branchsters-color-button {
+	margin-right: 15px;
+	margin-bottom: 15px;
 }
 
 .branchsters-arrow {
@@ -280,18 +298,27 @@ h3 {
 	bottom: 10px;
 }
 
-#branchsters-create-button {
-	top: -20px;
-	position: relative;
-	font-weight: 100;
-	background: #00D0F3;
-	border-color: #00A7C3;
+.branchsters-share-icon {
+	vertical-align: top;
+	margin-left: -8px;
+}
+
+.branchsters-button {
 	text-transform: uppercase;
 	border-radius: 8px;
 	font-family: 'Roboto', Arial;
 	color: #FFF;
 	text-decoration: none;
 	font-size: 25px;
+	font-weight: 100;
+}
+
+#branchsters-create-button {
+	top: -20px;
+	position: relative;
+	
+	background: #00D0F3;
+	border-color: #00A7C3;
 }
 ```
 
@@ -377,7 +404,9 @@ angular.module('branchsterWebApp')
 
   	$scope.load = function(data) {
   		// Interface
-  		$scope.showEditor = true;
+  		if(!data['monster']) {
+			$scope.showEditor = true;
+		}
   		$scope.loaded = true;
 
   		// Load Branchster
@@ -526,7 +555,12 @@ All default values, and the colors and descriptions array have been added to an 
 	(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-v1.2.0.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"init data setIdentity logout track link sendSMS referrals credits redeem banner".split(" "),0);
 </script>
 ```
-The functions following that, `switchColor`, `incrementFace`, and `incrementBody`, are called by the Branchster editor to switch the body parts and color. The functions `createBranchster` and `recreateBranchster`, are called by the viewer and the editor to switch between editing, and viewing. `onTextClick` is called by the pastboard sharing box to let the user easily select the entire generated link by clicking on it. `makeLink` is called by the viewer to generate the Branch links for the various sharing channels. And finally, `sendSMS` is called by the SMS link sending form.
+
+First, let's add a boolean that will trigger between an editing and a viewing mode in the view, called `showEditor`, that defaults to `true`. We can then bind elements in the interface using `ng-show` and `ng-hide` to easily switch between the two modes. Next, we'll define an object literal of the link data we want to send to Branch, namely, the parameters that make our Branchster.
+
+The next two methods, `createBranchster` and `recreateBranchster` switch between the editing and viewing modes of our interface, toggling `showEditor`, and also showing the universal app banner that is part of the Branch Web SDK. The last function, `makeLink`, takes a single argument of `channel` and will be called by 4 sharing buttons: Facebook, Twitter, Email, and SMS. Until we build a way of sharing the generated links, let's just output them to the console for testing.
+
+The functions following that, `switchColor`, `incrementFace`, and `incrementBody`, are called by the Branchster editor to switch the body parts and color. The functions `createBranchster` and `recreateBranchster`, are called by the viewer and the editor to switch between editing, and viewing. `onTextClick` is called by the pastboard sharing box to let the user easily select the entire generated link by clicking on it. And finally, `sendSMS` is called by the SMS link sending form.
 
 You'll notice we've injected a `utilities` Angular service in the updated controller. Many of the functions are more universal "utility" than one-time use functions that are called directly from the view, so it makes more sense to move them to an outside dependency we can call with the goal of keeping our controller DRY.
 
@@ -599,11 +633,6 @@ There are six functions here that we use more than once in the controller (or ma
 - **getDescription**: Moved from the controller, as it is not directly called by the view. Returns the correctdescription for the current faceIndex, and name.
 - **flashState**: Toggles a variable to `true`, then back to `false`, for the desired amount of time. Used to show error and success form feedback for 3000 miliseconds.
 
-##### Explanation
-First, let's add a boolean that will trigger between an editing and a viewing mode in the view, called `showEditor`, that defaults to `true`. We can then bind elements in the interface using `ng-show` and `ng-hide` to easily switch between the two modes. Next, we'll define an object literal of the link data we want to send to Branch, namely, the parameters that make our Branchster.
-
-The next two methods, `createBranchster` and `recreateBranchster` switch between the editing and viewing modes of our interface, toggling `showEditor`, and also showing the universal app banner that is part of the Branch Web SDK. The last function, `makeLink`, takes a single argument of `channel` and will be called by 4 sharing buttons: Facebook, Twitter, Email, and SMS. Until we build a way of sharing the generated links, let's just output them to the console for testing.
-
 ##### HTML for interface
 
 Next, we need to update our interface. We need to add `ng-show` directives to all of the labels, inputs, and buttons that have to do with making a Branchster, and ng-hide directives to every element that has to do with viewing a Branchster. Additionally, we're adding a 'RECREATE BRANCHSTER' button with an `ng-hide` directive to toggle back to editing mode, and a button group of the four sharing options.
@@ -666,4 +695,54 @@ app/views/main.html
 </form>
 ```
 
-This gets us a functional app, that utilizes the Branch Web SDK to generate links that embed all required parameters for sharing users' Branchsters! Next, we'll incorporate the SMSLink method of the Branch Web SDK, and sharing functionality of the Facebooka and Twitter JS SDKs.
+And lastly, a few more style additions for the elements we've added to `main.html`:
+
+app/styles/main.css
+```
+...
+#branchsters-sms-send {
+	width: initial;
+	padding-top: 8px;
+	margin-top: 10px;
+}
+
+#branchsters-sms-sent {
+	display: block;
+	margin-top: 10px;
+	color: green;
+	font-size: 18px;
+}
+...
+```
+
+This gets us a functional app, that utilizes the Branch Web SDK to generate links that embed all required parameters for sharing users' Branchsters! Next, we'll incorporate the SMSLink method of the Branch Web SDK, and sharing functionality via SMS, Facebook, Twitter, Pinterest, clipboard, and SMS.
+
+![Branchsters Screen Shot 2](tutorial-imgs/tut-screenshot2.png)
+
+##### 5. Deploy
+
+Of course we want actually users to access our Branchsters app, so we'll want to package this up for deployment. Prepping our code for production couldn't be easier, just run:
+```
+$ grunt
+```
+
+This executes the build command, which takes care of:
+- Linting our code
+- Running our tests (We haven't written any yet. But if we did, they would run!)
+- Concatenating and inifying our scripts and styles to save on those network requests
+- Optimizing images
+- Compiling the output of any preprocessors we’re using
+- Generally, just make the app lean
+
+Now, if you want to preview the production build, just run:
+```
+$ grunt serve:dist
+```
+
+Which builds the same result as above, but also serves it out to preview in our browser. From here, it is up to you how you get the `/dist` folder onto a server.
+
+##### Future direction
+One obvious addition to this app, is local storage, so that the same Branchster shows when the user revisits the page. Since that doesn't directly have anything to do with the Branch Web SDK, we've omitted it for now.
+
+
+Have any questions, or suggestions about this example? Shoot an email to [scott@branchmetrics.io](mailto:scott@branchmetrics.io)!
