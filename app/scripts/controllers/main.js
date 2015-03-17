@@ -44,6 +44,8 @@ angular.module('branchsterWebApp')
 
 	    // Interface
         $scope.interfaceResetTime = 3000;
+        $scope.smsError = false;
+        $scope.showSMSSent = false;
   	};
 
   	$scope.load = function(data) {
@@ -72,7 +74,6 @@ angular.module('branchsterWebApp')
     	$scope.selectedBodyIndex += utilities.loopIncrement(amount, $scope.selectedBodyIndex, 4);
     };
 
-    // Public
     $scope.createBranchster = function() {
 		$scope.showEditor = false;
 		$scope.branchsterName = $scope.branchsterName || $scope.defaultName;
@@ -122,8 +123,8 @@ angular.module('branchsterWebApp')
 				utilities.popup(
 					'https://twitter.com/intent/tweet?text=Check%20out%20my%20Branchster%20name%20' + $scope.branchsterName + '&url=' + link + '&original_referer=',
 					{
-						width: 800,
-						height: 350,
+						width: 848,
+						height: 645,
 						name:'twitter',
 					}
 				);
@@ -154,10 +155,9 @@ angular.module('branchsterWebApp')
 		});
     };
 
-    $scope.sendSMS  =function() {
-    	$scope.smsError = false;
-    	$scope.interfaceWait = true;
+    $scope.sendSMS = function() {
     	if ($scope.phone) {
+    		$scope.interfaceWait = true;
     		window.branch.sendSMS(
 			$scope.phone,
 			{ data: utilities.linkData($scope) },
@@ -166,29 +166,19 @@ angular.module('branchsterWebApp')
 				make_new_link: false
 			},
 			function(err) {
-				$scope.interfaceWait = false;
-				if (err) {
-					$scope.smsError = true;
-				}
-				else {
-					$scope.showSMSSent = true;
-					
-					setTimeout(function() {
-						$scope.$apply();
-						$scope.showSMSSent = false;
-					}, $scope.interfaceResetTime);
-				}
+				$scope.$apply(function() {
+					if (err) {
+						utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
+					}
+					else {					
+						utilities.flashState($scope, 'showSMSSent', $scope.interfaceResetTime);
+					}
+				});
 			});
     	}
     	else {
-    		$scope.smsError = true;
-    		$scope.interfaceWait = false;
-    		setTimeout(function() {
-				$scope.smsError = false;
-				$scope.$apply();
-			}, $scope.interfaceResetTime);
+    		utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
     	}
-    	$scope.$apply();
     };
 
     // Inititate the app

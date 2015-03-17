@@ -38,7 +38,7 @@
 				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('clipboard')"><i class="fa fa-clipboard branchsters-share-icon"></i></button>
 			</div>
 			<!--- SMS -->
-			<input type="text" ng-show="showSMS" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
+			<input type="text" ng-show="showSMS" ng-disabled="interfaceWait" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
 			<button type="button" ng-show="showSMS" ng-disabled="interfaceWait" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
 			<span id="branchsters-sms-sent" ng-show="showSMSSent">SMS Sent!</span>
 

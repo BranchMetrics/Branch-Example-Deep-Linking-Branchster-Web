@@ -8,11 +8,11 @@
  * Service in the branchsterWebApp.
  */
 angular.module('branchsterWebApp')
-	.service('utilities', function () {
+	.service('utilities', ['$timeout', function ($timeout) {
 		this.popup = function(url, popupOptions) {
-			var left   = (window.innerWidth  - popupOptions.width)  / 2,
-			top    = (window.innerHeight - popupOptions.height) / 2,
-			options   = 'status=1' +
+			var left = (window.innerWidth  - popupOptions.width)  / 2,
+			top = (window.innerHeight - popupOptions.height) / 2,
+			options = 'status=1' +
 				',width='  + popupOptions.width  +
 				',height=' + popupOptions.height +
 				',top='    + top    +
@@ -50,4 +50,12 @@ angular.module('branchsterWebApp')
 	    this.getDescription = function(scope) {
 			return scope.descriptions[scope.selectedFaceIndex].replace('$name', scope.branchsterName);
 		};
-	});
+
+		this.flashState = function(scope, state, flashTime) {
+			scope[state] = true;
+			scope.interfaceWait = false;
+    		$timeout(function() {
+				scope[state] = false;
+			}, flashTime);
+		};
+	}]);
