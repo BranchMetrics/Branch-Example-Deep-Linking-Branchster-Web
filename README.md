@@ -321,46 +321,280 @@ You'll also need to initialize the SDK with your App Key. Per the Branch Web SDK
 
 We're now setup to add more functionality to our app, and integrate the Branch Web SDK. The SDK attaches an instance of itself to the global `window` object as `branch` - which will be accessible inside of the Angular controller.
 
-Lets add a few methods to the Angular controller, after the methods we have already implemented:
+As part of this integration, we want an easy way of using the Facebook JS SDK to let our Branchster users share their Branchsters on Facebook. This can be easily accomplished with the angular-facebook module, so let's install that:
+```
+$ bower install --save angular-facebook
+```
+
+You'll see below, that we also need to add this as a dependency to our contreoller using Angular array notation. Let's add a few more methods to the Angular controller, and refactor our code to keep things DRY.
 
 app/scripts/controllers/main.js
 ```
-$scope.showEditor = true;
+angular.module('branchsterWebApp')
+	.config(function(FacebookProvider) {
+		 FacebookProvider.init('348703352001630');
+	})
+  .controller('MainCtrl', ['$scope', 'Facebook', 'utilities', function ($scope, Facebook, utilities) {
 
-$scope.linkData = {
-		'$color_index': $scope.selectedColorIndex,
-		'$body_index': $scope.selectedBodyIndex,
-		'$face_index': $scope.selectedFaceIndex,
-		'$monster_name': $scope.branchsterName,
-		'$og_title': 'My Branchster: ' + $scope.branchsterName,
-		'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + $scope.selectedColorIndex + $scope.selectedBodyIndex + $scope.selectedFaceIndex + '.png'
+  	$scope.init = function() {
+  		// available branchster colors
+	    $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
+
+	    // descriptions of Branchster for each face
+	    $scope.descriptions = [
+			'$name is a social butterfly. She’s a loyal friend, ready to give you a piggyback ride at a moments notice or greet you with a face lick and wiggle.',
+			'Creative and contagiously happy, $name has boundless energy and an appetite for learning about new things. He is vivacious and popular, and is always ready for the next adventure.',
+			'$name prefers to work alone and is impatient with hierarchies and politics.  Although he’s not particularly social, he has a razor sharp wit (and claws), and is actually very fun to be around.',
+			'Independent and ferocious, $name experiences life at 100 mph. Not interested in maintaining order, he is a fierce individual who is highly effective, successful, and incredibly powerful.',
+			'Peaceful, shy, and easygoing, $name takes things at his own pace and lives moment to moment. She is considerate, pleasant, caring, and introspective. She’s a bit nerdy and quiet -- but that’s why everyone loves him.'
+		];
+
+		// default name
+	    $scope.defaultName = 'Bingles Jingleheimer';
+
+		// selected branchster on load
+	    $scope.selectedFaceIndex = 0;
+	    $scope.selectedBodyIndex = 0;
+	    $scope.selectedColorIndex = 0;
+	    $scope.branchsterName = $scope.defaultName;
+	    $scope.description = utilities.getDescription($scope);
+
+	    // Links
+	    $scope.phone = '';
+	    $scope.smsLink = '';
+	    $scope.displayLink = '';
+	    $scope.clipboardLink = '';
+
+	    // Interface
+        $scope.interfaceResetTime = 3000;
+        $scope.smsError = false;
+        $scope.showSMSSent = false;
+        $scope.loaded = false;
+  	};
+
+  	$scope.load = function(data) {
+  		// Interface
+  		$scope.showEditor = true;
+  		$scope.loaded = true;
+
+  		// Load Branchster
+  		/*jshint -W069 */
+  		$scope.selectedFaceIndex = data['face_index'] || $scope.selectedFaceIndex;
+	    $scope.selectedBodyIndex = data['body_index'] || $scope.selectedBodyIndex;
+	    $scope.selectedColorIndex = data['color_index'] || $scope.selectedColorIndex;
+		$scope.branchsterName = data['monster_name'] || $scope.branchsterName;
+		/*jshint +W069 */
+  	};
+
+    $scope.switchColor = function(color) {
+    	$scope.selectedColorIndex = color;
+    };
+
+    $scope.incrementFace = function(amount) {
+    	$scope.selectedFaceIndex += utilities.loopIncrement(amount, $scope.selectedFaceIndex, 4);
+    	$scope.description = utilities.getDescription($scope);
+    };
+
+    $scope.incrementBody = function(amount) {
+    	$scope.selectedBodyIndex += utilities.loopIncrement(amount, $scope.selectedBodyIndex, 4);
+    };
+
+    $scope.createBranchster = function() {
+		$scope.showEditor = false;
+		$scope.branchsterName = $scope.branchsterName || $scope.defaultName;
+		window.branch.banner({
+			title: 'Branchsters',
+			description: 'Open your Branchster in our mobile app!',
+			showDesktop: false,
+			icon: 'images/icons/icon3.png'
+		}, {
+			channel: 'banner',
+			feature: 'share',
+			tags: [ 'desktop_creator' ],
+			data: utilities.linkData($scope)
+		});
+		$scope.makeLink('display');
+    };
+
+    $scope.recreateBranchster = function() {
+    	$scope.showEditor = true;
+    };
+
+	$scope.onTextClick = function ($event) {
+		$event.target.select();
 	};
 
-$scope.createBranchster = function() {
-	$scope.showEditor = false;
-	window.branch.banner({
-		title: 'Branchsters',
-		description: 'Open your Branchster in our mobile app!',
-		icon: 'images/icons/icon3.png'
-	}, {
-		channel: 'banner',
-		data: $scope.linkData
-	});
-};
+    $scope.makeLink = function(channel) {
+    	utilities.resetShows($scope);
+    	$scope.interfaceWait = true;
+		window.branch.link({
+			channel: channel,
+			feature: 'share',
+			tags: [ 'desktop_creator' ],
+			data: utilities.linkData($scope)
+		}, function(err, link) {
+			$scope.$apply(function() {
+				if (channel === 'sms') {
+					$scope.showSMS = true;
+					$scope.smsLink = link;
+				} 
+				else if (channel === 'display') {
+					$scope.displayLink = link;
+				}
+				else if (channel === 'clipboard') {
+					$scope.showClipboard = true;
+					$scope.clipboardLink = link;
+				}
+				else if (channel === 'twitter') {
+					utilities.popup(
+						'https://twitter.com/intent/tweet?text=Check%20out%20my%20Branchster%20name%20' + $scope.branchsterName + '&url=' + link + '&original_referer=',
+						{
+							width: 848,
+							height: 645,
+							name:'twitter',
+						}
+					);
+				}
+				else if (channel === 'pinterest') {
+					utilities.popup(
+						'http://pinterest.com/pin/create/link/?url=' + link,
+						{
+							width: 800,
+							height: 550,
+							name:'pinterest',
+						}
+					);
+				}
+				else if (channel === 'facebook') {
+					$scope.facebookLink = link;
+					Facebook.ui({
+						method: 'share_open_graph',
+						/*jshint camelcase: false */
+						action_type: 'og.likes',
+						action_properties: JSON.stringify({
+							object: link,
+						}),
+					}, function(response){ console.log(response); });
+				}
+				$scope.interfaceWait = false;
+			});
+		});
+    };
 
-$scope.recreateBranchster = function() {
-	$scope.showEditor = true;
-};
+    $scope.sendSMS = function() {
+    	if ($scope.phone) {
+    		$scope.interfaceWait = true;
+    		window.branch.sendSMS(
+			$scope.phone,
+			{ data: utilities.linkData($scope) },
+			{
+				/*jshint camelcase: false */
+				make_new_link: false
+			},
+			function(err) {
+				$scope.$apply(function() {
+					if (err) {
+						utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
+					}
+					else {					
+						utilities.flashState($scope, 'showSMSSent', $scope.interfaceResetTime);
+					}
+				});
+			});
+    	}
+    	else {
+    		utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
+    	}
+    };
 
-$scope.makeLink = function(channel) {
-	window.branch.link({
-		channel: channel,
-		data: $scope.linkData
-	}, function(err, link) {
-		console.log(err, link);
+    // Inititate the app
+    $scope.init();
+    window.branch.init('36930236817866882', function(err, data) {
+    	if (!err) {
+    		$scope.load(data);
+    	}
 	});
-};
+}]);
 ```
+##### Explanation
+All default values, and the colors and descriptions array have been added to an `init` function. We've also added a `loaded` function, that triggers showing the interface, and any Branchster provided by the Branch link. We trigger this by moving the `window.branch.init` function from the include tag in `index.html`, to the bottom of the controller. So let's remove that from `index.html`, leaving just:
+```
+<script type="text/javascript">
+	(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-v1.2.0.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"init data setIdentity logout track link sendSMS referrals credits redeem banner".split(" "),0);
+</script>
+```
+The functions following that, `switchColor`, `incrementFace`, and `incrementBody`, are called by the Branchster editor to switch the body parts and color. The functions `createBranchster` and `recreateBranchster`, are called by the viewer and the editor to switch between editing, and viewing. `onTextClick` is called by the pastboard sharing box to let the user easily select the entire generated link by clicking on it. `makeLink` is called by the viewer to generate the Branch links for the various sharing channels. And finally, `sendSMS` is called by the SMS link sending form.
+
+You'll notice we've injected a `utilities` Angular service in the updated controller. Many of the functions are more universal "utility" than one-time use functions that are called directly from the view, so it makes more sense to move them to an outside dependency we can call with the goal of keeping our controller DRY.
+
+To help us with making a service, Yeoman Angular includes a generator for services, so let's use that:
+```
+$ yo angular:service utilities
+```
+
+Then, open up the generated `app/scripts/services/utilities.js`, and modify it to:
+```
+angular.module('branchsterWebApp')
+	.service('utilities', ['$timeout', function ($timeout) {
+		this.popup = function(url, popupOptions) {
+			var left = (window.innerWidth  - popupOptions.width)  / 2,
+			top = (window.innerHeight - popupOptions.height) / 2,
+			options = 'status=1' +
+				',width='  + popupOptions.width  +
+				',height=' + popupOptions.height +
+				',top='    + top    +
+				',left='   + left;
+
+			window.open(url, popupOptions.name, options);
+		};
+
+		// loops through indices for the body and face, between 0 and max
+		this.loopIncrement = function(amount, index, max) {
+	    	amount = (index === 0 && amount === -1) ? max : amount;
+			amount = (index === max && amount === 1) ? -1 * max : amount;
+			return amount;
+	    };
+
+	    this.linkData = function(scope) {
+	    	return {
+				'color_index': scope.selectedColorIndex,
+				'body_index': scope.selectedBodyIndex,
+				'face_index': scope.selectedFaceIndex,
+				'monster_name': scope.branchsterName,
+				'monster': true,
+				'$desktop_url': 'http://cdn.branch.io/branchster-angular/',
+				'$og_title': 'My Branchster: ' + scope.branchsterName,
+				'$og_description': scope.description,
+				'$og_image_url': 'https://s3-us-west-1.amazonaws.com/branchmonsterfactory/' + scope.selectedColorIndex + scope.selectedBodyIndex + scope.selectedFaceIndex + '.png'
+			};
+		};
+
+		this.resetShows = function(scope) {
+	    	scope.showSMS = false;
+		    scope.showClipboard = false;
+	    };
+
+	    this.getDescription = function(scope) {
+			return scope.descriptions[scope.selectedFaceIndex].replace('$name', scope.branchsterName);
+		};
+
+		this.flashState = function(scope, state, flashTime) {
+			scope[state] = true;
+			scope.interfaceWait = false;
+    		$timeout(function() {
+				scope[state] = false;
+			}, flashTime);
+		};
+	}]);
+```
+##### Explanation
+There are six functions here that we use more than once in the controller (or may use more than once in the future):
+- **popup**: We'll use this to display Facebook, Twitter, and Pinterest share popups.
+- **loopIncrement**: Moved from the controller, as it is not directly called by the view.
+- **linkData**: Moved from the controller, as it is not directly called by the view.
+- **resetShows**: We'll group any booleans tied to an ng-show directive here.
+- **getDescription**: Moved from the controller, as it is not directly called by the view. Returns the correctdescription for the current faceIndex, and name.
+- **flashState**: Toggles a variable to `true`, then back to `false`, for the desired amount of time. Used to show error and success form feedback for 3000 miliseconds.
 
 ##### Explanation
 First, let's add a boolean that will trigger between an editing and a viewing mode in the view, called `showEditor`, that defaults to `true`. We can then bind elements in the interface using `ng-show` and `ng-hide` to easily switch between the two modes. Next, we'll define an object literal of the link data we want to send to Branch, namely, the parameters that make our Branchster.
@@ -373,23 +607,25 @@ Next, we need to update our interface. We need to add `ng-show` directives to al
 
 app/views/main.html
 ```
-<form>
+<div ng-hide="loaded" class="branchsters-heading">Loading...</div>
+<form ng-show="loaded">
 	<div class="form-group">
 		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
-		<input type="text" ng-show="showEditor" class="form-control" id="name" name="name" placeholder="John" ng-model="branchsterName">
+		<input type="text" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
+		<p class="lead" id="branchsters-description" ng-bind="description"></p>
 	<div class="form-group">
 		<label for="body" ng-show="showEditor" class="branchsters-heading">Choose face and body</label>
 		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
 			<!-- monster components -->
-			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{selectedFaceIndex}}face.png"></img>
-			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{selectedBodyIndex}}body.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{ selectedFaceIndex }}face.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{ selectedBodyIndex }}body.png"></img>
 			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
 			<!-- arrows -->
-			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementFace(-1)"></i>
-			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-show="showEditor" ng-click="incrementFace(1)"></i>
-			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>
-			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-show="showEditor" ng-click="incrementBody(1)"></i>
+			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>
+			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-show="showEditor" ng-click="incrementBody(1)"></i>
+			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-show="showEditor" ng-click="incrementFace(-1)"></i>
+			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-show="showEditor" ng-click="incrementFace(1)"></i>
 		</div>
 	</div>
 	<div ng-show="showEditor" class="form-group">
@@ -400,37 +636,31 @@ app/views/main.html
 			</div>
 		</div>
 	</div>
-	<div ng-hide="showEditor" class="form-group">
+	<div ng-hide="showEditor" class="form-group"  ng-class="{ 'has-error':smsError }">
+		<p class="lead" ng-hide="showEditor" id="branchsters-display-link" ng-bind="displayLink"></p>
 		<label for="color" class="branchsters-heading">Share Your Monster</label>
 		<div class="jumbotron branchsters-square">
 			<div class="btn-group btn-group-lg" role="group">
-				<button type="button" class="btn btn-default" ng-click="makeLink('email')"><i class="fa fa-envelope branchsters-share-icon"></i></button>
-				<button type="button" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
-				<button type="button" class="btn btn-default" ng-click="makeLink('facebook')"><i class="fa fa-facebook branchsters-share-icon"></i></button>
-				<button type="button" class="btn btn-default" ng-click="makeLink('twitter')"><i class="fa fa-twitter branchsters-share-icon"></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('facebook')"><i class="fa fa-facebook branchsters-share-icon"></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('twitter')"><i class="fa fa-twitter branchsters-share-icon"></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('pinterest')"><i class="fa fa-pinterest branchsters-share-icon"></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('clipboard')"><i class="fa fa-clipboard branchsters-share-icon"></i></button>
 			</div>
+			<!--- SMS -->
+			<input type="text" ng-show="showSMS" ng-disabled="interfaceWait" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
+			<button type="button" ng-show="showSMS" ng-disabled="interfaceWait" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
+			<span id="branchsters-sms-sent" ng-show="showSMSSent">SMS Sent!</span>
+
+			<!-- Clipboard -->
+			<input type="text" ng-show="showClipboard" class="form-control" ng-model="clipboardLink" ng-click="onTextClick($event)" readonly="readonly">
 		</div>
 	</div>
 	<div class="form-group branchsters-heading">
-		<button type="button" class="btn btn-default btn-lg btn-success" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
-		<button type="button" class="btn btn-default btn-lg btn-success" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
 	</div>
 </form>
 ```
 
 This gets us a functional app, that utilizes the Branch Web SDK to generate links that embed all required parameters for sharing users' Branchsters! Next, we'll incorporate the SMSLink method of the Branch Web SDK, and sharing functionality of the Facebooka and Twitter JS SDKs.
-
-##### 6. Sharing functionality
-
-```
-$ bower install --save angular-socialshare
-```
-
-app.js
-```
-dependency:     'facebook'
-```
-
-```
-$ yo angular:service utilities
-```

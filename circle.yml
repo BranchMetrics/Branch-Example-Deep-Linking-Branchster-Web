@@ -22,4 +22,3 @@ deployment:
     branch: angular
     commands:
       - bundle exec s3cp -r dist/* s3://branch-web-sdk/branchster-angular/
-      - bundle exec s3cp -r dist/index.html s3://branch-web-sdk/branchster-angular/index.html
