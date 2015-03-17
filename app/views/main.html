@@ -8,8 +8,8 @@
 		<label for="body" ng-show="showEditor" class="branchsters-heading">Choose face and body</label>
 		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
 			<!-- monster components -->
-			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{selectedFaceIndex}}face.png"></img>
-			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{selectedBodyIndex}}body.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{ selectedFaceIndex }}face.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{ selectedBodyIndex }}body.png"></img>
 			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
 			<!-- arrows -->
 			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>

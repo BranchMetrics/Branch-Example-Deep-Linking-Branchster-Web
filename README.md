@@ -430,3 +430,7 @@ app.js
 ```
 dependency:     'facebook'
 ```
+
+```
+$ yo angular:service utilities
+```

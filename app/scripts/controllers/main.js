@@ -11,7 +11,7 @@ angular.module('branchsterWebApp')
 	.config(function(FacebookProvider) {
 		 FacebookProvider.init('348703352001630');
 	})
-  .controller('MainCtrl', function ($scope, Facebook) {
+  .controller('MainCtrl', ['$scope', 'Facebook', 'utilities', function ($scope, Facebook, utilities) {
   	// Step 3
   	// ============================================================
 
@@ -123,24 +123,22 @@ angular.module('branchsterWebApp')
 				$scope.clipboardLink = link;
 			}
 			else if (channel === 'twitter') {
-				$scope.popup(
+				utilities.popup(
 					'https://twitter.com/intent/tweet?text=Check%20out%20my%20Branchster%20name%20' + $scope.branchsterName + '&url=' + link + '&original_referer=',
 					{
-						width: 450,
-						height: 450,
+						width: 800,
+						height: 350,
 						name:'twitter',
-
 					}
 				);
 			}
 			else if (channel === 'pinterest') {
-				$scope.popup(
+				utilities.popup(
 					'http://pinterest.com/pin/create/link/?url=' + link,
 					{
-						width: 450,
-						height: 450,
+						width: 800,
+						height: 550,
 						name:'pinterest',
-
 					}
 				);
 			}
@@ -216,15 +214,4 @@ angular.module('branchsterWebApp')
 		$event.target.select();
 	};
 
-	$scope.popup = function(url, popupOptions) {
-		var left   = (window.innerWidth  - popupOptions.width)  / 2,
-		top    = (window.innerHeight - popupOptions.height) / 2,
-		options   = 'status=1' +
-			',width='  + popupOptions.width  +
-			',height=' + popupOptions.height +
-			',top='    + top    +
-			',left='   + left;
-
-		window.open(url, popupOptions.name, options);
-	};
-});
+}]);
