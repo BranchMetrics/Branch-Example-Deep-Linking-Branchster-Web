@@ -51,7 +51,10 @@ angular.module('branchsterWebApp')
 
   	$scope.load = function(data) {
   		// Interface
-  		$scope.showEditor = true;
+  		//if(!data['monster']) {
+			
+		//}
+		$scope.showEditor = true;
   		$scope.loaded = true;
 
   		// Load Branchster
@@ -188,7 +191,9 @@ angular.module('branchsterWebApp')
     $scope.init();
     window.branch.init('36930236817866882', function(err, data) {
     	if (!err) {
-    		$scope.load(data);
+    		$scope.$apply(function() {
+	    		$scope.load(data);
+	    	});
     	}
 	});
 }]);
