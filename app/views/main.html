@@ -1,4 +1,5 @@
-<form>
+<div ng-hide="loaded" class="branchsters-heading">Loading...</div>
+<form ng-show="loaded">
 	<div class="form-group">
 		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>

@@ -46,11 +46,13 @@ angular.module('branchsterWebApp')
         $scope.interfaceResetTime = 3000;
         $scope.smsError = false;
         $scope.showSMSSent = false;
+        $scope.loaded = false;
   	};
 
   	$scope.load = function(data) {
   		// Interface
   		$scope.showEditor = true;
+  		$scope.loaded = true;
 
   		// Load Branchster
   		/*jshint -W069 */
@@ -108,50 +110,51 @@ angular.module('branchsterWebApp')
 			tags: [ 'desktop_creator' ],
 			data: utilities.linkData($scope)
 		}, function(err, link) {
-			if (channel === 'sms') {
-				$scope.showSMS = true;
-				$scope.smsLink = link;
-			} 
-			else if (channel === 'display') {
-				$scope.displayLink = link;
-			}
-			else if (channel === 'clipboard') {
-				$scope.showClipboard = true;
-				$scope.clipboardLink = link;
-			}
-			else if (channel === 'twitter') {
-				utilities.popup(
-					'https://twitter.com/intent/tweet?text=Check%20out%20my%20Branchster%20name%20' + $scope.branchsterName + '&url=' + link + '&original_referer=',
-					{
-						width: 848,
-						height: 645,
-						name:'twitter',
-					}
-				);
-			}
-			else if (channel === 'pinterest') {
-				utilities.popup(
-					'http://pinterest.com/pin/create/link/?url=' + link,
-					{
-						width: 800,
-						height: 550,
-						name:'pinterest',
-					}
-				);
-			}
-			else if (channel === 'facebook') {
-				$scope.facebookLink = link;
-				Facebook.ui({
-					method: 'share_open_graph',
-					/*jshint camelcase: false */
-					action_type: 'og.likes',
-					action_properties: JSON.stringify({
-						object: link,
-					}),
-				}, function(response){ console.log(response); });
-			}
-			$scope.interfaceWait = false;
-			$scope.$apply();
+			$scope.$apply(function() {
+				if (channel === 'sms') {
+					$scope.showSMS = true;
+					$scope.smsLink = link;
+				} 
+				else if (channel === 'display') {
+					$scope.displayLink = link;
+				}
+				else if (channel === 'clipboard') {
+					$scope.showClipboard = true;
+					$scope.clipboardLink = link;
+				}
+				else if (channel === 'twitter') {
+					utilities.popup(
+						'https://twitter.com/intent/tweet?text=Check%20out%20my%20Branchster%20name%20' + $scope.branchsterName + '&url=' + link + '&original_referer=',
+						{
+							width: 848,
+							height: 645,
+							name:'twitter',
+						}
+					);
+				}
+				else if (channel === 'pinterest') {
+					utilities.popup(
+						'http://pinterest.com/pin/create/link/?url=' + link,
+						{
+							width: 800,
+							height: 550,
+							name:'pinterest',
+						}
+					);
+				}
+				else if (channel === 'facebook') {
+					$scope.facebookLink = link;
+					Facebook.ui({
+						method: 'share_open_graph',
+						/*jshint camelcase: false */
+						action_type: 'og.likes',
+						action_properties: JSON.stringify({
+							object: link,
+						}),
+					}, function(response){ console.log(response); });
+				}
+				$scope.interfaceWait = false;
+			});
 		});
     };
 
