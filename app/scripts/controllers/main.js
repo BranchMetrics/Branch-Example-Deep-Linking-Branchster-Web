@@ -51,19 +51,18 @@ angular.module('branchsterWebApp')
 
   	$scope.load = function(data) {
   		// Interface
-  		//if(!data['monster']) {
-			
-		//}
-		$scope.showEditor = true;
-  		$scope.loaded = true;
+		$scope.$apply(function() {
+			$scope.showEditor = true;
+	  		$scope.loaded = true;
 
-  		// Load Branchster
-  		/*jshint -W069 */
-  		$scope.selectedFaceIndex = data['face_index'] || $scope.selectedFaceIndex;
-	    $scope.selectedBodyIndex = data['body_index'] || $scope.selectedBodyIndex;
-	    $scope.selectedColorIndex = data['color_index'] || $scope.selectedColorIndex;
-		$scope.branchsterName = data['monster_name'] || $scope.branchsterName;
-		/*jshint +W069 */
+	  		// Load Branchster
+	  		/*jshint -W069 */
+	  		$scope.selectedFaceIndex = data['face_index'] || $scope.selectedFaceIndex;
+		    $scope.selectedBodyIndex = data['body_index'] || $scope.selectedBodyIndex;
+		    $scope.selectedColorIndex = data['color_index'] || $scope.selectedColorIndex;
+			$scope.branchsterName = data['monster_name'] || $scope.branchsterName;
+			/*jshint +W069 */
+		});
   	};
 
     $scope.switchColor = function(color) {
@@ -84,7 +83,7 @@ angular.module('branchsterWebApp')
 		$scope.branchsterName = $scope.branchsterName || $scope.defaultName;
 		window.branch.banner({
 			title: 'Branchsters',
-			description: 'Open your Branchster in our mobile app!',
+			description: 'Get the app!',
 			showDesktop: false,
 			icon: 'images/icons/icon3.png'
 		}, {
@@ -191,9 +190,7 @@ angular.module('branchsterWebApp')
     $scope.init();
     window.branch.init('36930236817866882', function(err, data) {
     	if (!err) {
-    		$scope.$apply(function() {
-	    		$scope.load(data);
-	    	});
+    		$scope.load(data);
     	}
 	});
 }]);

@@ -17,8 +17,16 @@ angular.module('branchsterWebApp')
 				',height=' + popupOptions.height +
 				',top='    + top    +
 				',left='   + left;
+			if (this.mobileUserAgent) {
+				window.location.href = url;
+			}
+			else {
+				window.open(url, popupOptions.name, options);
+			}
+		};
 
-			window.open(url, popupOptions.name, options);
+		this.mobileUserAgent = function() {
+			return navigator.userAgent.match(/android|i(os|p(hone|od|ad))/i) ? (navigator.userAgent.match(/android/i) ? 'android' : 'ios') : false;
 		};
 
 		// loops through indices for the body and face, between 0 and max
