@@ -22,4 +22,5 @@ deployment:
     branch: angular
     commands:
       - bundle exec s3cp -r dist/* s3://branch-web-sdk/branchster-angular/
+      - sudo pip install awscli
       - aws s3 cp dist/index.html s3://branch-web-sdk/branchster-angular/index.html
