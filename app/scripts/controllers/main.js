@@ -16,7 +16,7 @@ angular.module('branchsterWebApp')
   	$scope.updateDescription = function() {
     	$scope.description = utilities.getDescription($scope);
     };
-	    
+
   	$scope.init = function() {
   		// available branchster colors
 	    $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
@@ -88,7 +88,6 @@ angular.module('branchsterWebApp')
 		window.branch.banner({
 			title: 'Branchsters',
 			description: 'Get the app!',
-			showDesktop: false,
 			icon: 'images/icons/icon3.png'
 		}, {
 			channel: 'banner',
