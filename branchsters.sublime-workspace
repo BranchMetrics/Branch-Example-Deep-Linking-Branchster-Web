@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"flash",
+				"flashTime"
+			],
+			[
+				"interf",
+				"interfaceResetTime"
+			],
+			[
+				"inter",
+				"interfaceResetTime"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"bran",
+				"branchsters-heading"
+			],
+			[
+				"paddin",
+				"padding-bottom"
+			],
+			[
+				"get",
+				"getDescription"
+			],
+			[
+				"sele",
+				"selectedFaceIndex"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"link",
+				"linkData"
+			],
+			[
+				"bord",
+				"border-bottom"
+			],
+			[
 				"app",
 				"app_id"
 			],
@@ -20,10 +68,6 @@
 				"identity"
 			],
 			[
-				"bran",
-				"branchAPI"
-			],
-			[
 				"post",
 				"postData"
 			],
@@ -34,10 +78,6 @@
 			[
 				"met",
 				"metadata"
-			],
-			[
-				"link",
-				"link_identifier"
 			],
 			[
 				"para",
@@ -122,10 +162,6 @@
 			[
 				"con",
 				"contentDocument"
-			],
-			[
-				"get",
-				"getElementById"
 			],
 			[
 				"branch-b",
@@ -312,10 +348,6 @@
 				"function"
 			],
 			[
-				"padd",
-				"padding-left"
-			],
-			[
 				"ma",
 				"margin-top"
 			],
@@ -340,26 +372,58 @@
 	"buffers":
 	[
 		{
-			"file": "css/style.css",
+			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 2282,
+				"buffer_size": 3859,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "index-react.html",
+			"file": "app/views/main.html",
 			"settings":
 			{
-				"buffer_size": 5201,
+				"buffer_size": 4493,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "index.html",
+			"file": "Gruntfile.js",
 			"settings":
 			{
-				"buffer_size": 2950,
+				"buffer_size": 9771,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/styles/main.css",
+			"settings":
+			{
+				"buffer_size": 3625,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/controllers/main.js",
+			"settings":
+			{
+				"buffer_size": 6071,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/services/utilities.js",
+			"settings":
+			{
+				"buffer_size": 2196,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 31877,
 				"line_ending": "Unix"
 			}
 		}
@@ -432,14 +496,48 @@
 	],
 	"file_history":
 	[
+		"/Users/scott/Code/JS/Web-SDK/src/0_banner_utils.js",
+		"/Users/scott/Code/JS/Web-SDK/src/0_utils.js",
+		"/Users/scott/Code/JS/Branchster-Web/circle.yml",
+		"/Users/scott/Code/JS/Branchster-Web/app/scripts/services/utilities.js",
+		"/Users/scott/Code/JS/Branchster-Web/README.md",
+		"/Users/scott/Code/JS/Branchster-Web/Gruntfile.js",
+		"/Users/scott/Code/JS/Branchster-Web/app/scripts/app.js",
+		"/Users/scott/Code/JS/Branchster-Web/bower_components/jquery/src/serialize.js",
+		"/Users/scott/Code/JS/Branchster-Web/node_modules/grunt-autoprefixer/node_modules/autoprefixer/node_modules/postcss/lib/syntax-error.js",
+		"/Users/scott/Code/JS/Branchster-Web/bower_components/es5-shim/shims.json",
+		"/Users/scott/Code/JS/Branchster-Web/.gitignore",
+		"/Users/scott/Code/JS/Branchster-Web/node_modules/grunt-google-cdn/node_modules/bower/node_modules/inquirer/node_modules/cli-color/bin/generate-color-images",
+		"/Users/scott/Code/JS/Branchster-Web/node_modules/grunt/node_modules/iconv-lite/test/gbk-test.js",
+		"/Users/scott/Code/JS/Branchster-Web/node_modules/grunt-svgmin/node_modules/svgo/plugins/cleanupIDs.js",
+		"/Users/scott/Code/JS/Branchster-Web/test/spec/controllers/main.js",
+		"/Users/scott/Code/JS/Branchster-Web/test/karma.conf.js",
+		"/Users/scott/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/scott/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/scott/Code/JS/Branchster-Web/bower_components/jquery/src/css.js",
+		"/Users/scott/Code/JS/Branchster-Web/node_modules/karma/lib/init/color_schemes.js",
+		"/Users/scott/Code/JS/Branchster-Web/bower_components/es5-shim/CHANGES",
+		"/Users/scott/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/scott/Library/Application Support/Sublime Text 3/Packages/User/SublimeServer.sublime-settings",
+		"/Users/scott/Code/JS/Branchster-Web/node_modules/grunt/node_modules/colors/ReadMe.md",
+		"/Users/scott/Code/JS/Branchster-Web/bower.json",
+		"/Users/scott/Code/JS/Branchster-Web/app/styles/main.css",
+		"/Users/scott/Code/JS/Branchster-Web/.tmp/styles/main.css",
+		"/Users/scott/Code/JS/Branchster-Web/node_modules/grunt-contrib-uglify/node_modules/uglify-js/lib/mozilla-ast.js",
+		"/Users/scott/Code/JS/Branchster-Web/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg",
+		"/Users/scott/Code/JS/Branchster-Web/.bowerrc",
+		"/Users/scott/Code/JS/Branchster-Web/bower_components/jquery/src/css/curCSS.js",
 		"/Users/scott/Code/JS/Branchster-Web/index.html",
+		"/Users/scott/Code/JS/Branchster-Web/css/style.css",
+		"/Users/scott/Code/JS/Branchster-Web/index-react.html",
+		"/Users/scott/Code/JS/Branchster-Web/css/font-awesome/fonts/fontawesome-webfont.svg",
+		"/Users/scott/Code/JS/Branchster-Web/branchsters.sublime-project",
 		"/Users/scott/Code/JS/Web-SDK/src/4_initialization.js",
 		"/Users/scott/Code/JS/Web-SDK/tests/2_branch_tests.html",
 		"/Users/scott/Code/JS/Web-SDK/src/2_banner.js",
 		"/Users/scott/Code/JS/Web-SDK/docs/2_intro.md",
 		"/Users/scott/Code/JS/Web-SDK/src/onpage.js",
 		"/Users/scott/Code/JS/Web-SDK/compiler/library/closure-library-master/closure/goog/date/utcdatetime_test.html",
-		"/Users/scott/Code/JS/Web-SDK/src/0_utils.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-util/node_modules/dateformat/test/test_isoutcdatetime.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/precommit-hook/utils.js",
 		"/Users/scott/Code/JS/closure-library/closure/goog/testing/asserts.js",
@@ -463,7 +561,6 @@
 		"/Users/scott/Code/JS/Web-SDK/tests/2_branch_tests.js",
 		"/Users/scott/Code/JS/Web-SDK/src/3_branch.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jshint/node_modules/minimatch/test/brace-expand.js",
-		"/Users/scott/Code/JS/Web-SDK/src/0_banner_utils.js",
 		"/Users/scott/Code/JS/Web-SDK/src/1_banner_css.js",
 		"/Users/scott/Code/JS/closure-library/closure/goog/testing/propertyreplacer_test.js",
 		"/Users/scott/Code/JS/closure-library/closure/goog/testing/mock.js",
@@ -497,7 +594,6 @@
 		"/Users/scott/Code/JS/Web-SDK/src/3_branch_instance.js",
 		"/Users/scott/Code/JS/Web-SDK/gulpfile.js",
 		"/Users/scott/Code/JS/Web-SDK/src/4_umd.js",
-		"/Users/scott/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/scott/Code/JS/Web-SDK/src/extern.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/node_modules/wrench/lib/x.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdox/node_modules/q/queue.js",
@@ -516,7 +612,6 @@
 		"/Users/scott/Code/JS/Web-SDK/compiler/library/closure-library-master/closure/goog/html/utils.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-uglify/node_modules/uglify-js/lib/utils.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jscs/node_modules/jscs/lib/utils.js",
-		"/Users/scott/Library/Application Support/Sublime Text 3/Packages/User/SublimeServer.sublime-settings",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp/node_modules/orchestrator/node_modules/end-of-stream/package.json",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/test/specs/jsdoc/config.js",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/lib/jsdoc/config.js",
@@ -528,42 +623,11 @@
 		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/test/tutorials/tutorials/test.json",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/test/tutorials/tutorials/test.html",
 		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/test/fixtures/testPlugin2.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/test/fixtures/testPlugin1.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/node_modules/crypto-browserify/example/test.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jshint/node_modules/lodash/string/templateSettings.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jshint/node_modules/jshint/node_modules/shelljs/src/toEnd.js",
-		"/Users/scott/Code/JS/Web-SDK/transform.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/node_modules/underscore/underscore-min.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/rhino/querystring.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jshint/node_modules/lodash/internal/arrayEach.js",
-		"/Users/scott/Code/Meteors/Convoy-mVP/convoy.sublime-project",
-		"/Users/scott/Code/JS/Web-SDK/docs/footer.md",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jshint/node_modules/lodash/object/forOwn.js",
-		"/Users/scott/Code/JS/Web-SDK/json3/lib/json3.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/rhino/os.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jscs/node_modules/jscs/node_modules/prompt/examples/old-schema.js",
-		"/Users/scott/Code/JS/Web-SDK/dist/onpage.min.js",
-		"/Users/scott/Code/JS/Web-SDK/docs/Intro.md",
-		"/Users/scott/Code/JS/Web-SDK/docs/Intro2.md",
-		"/Users/scott/Code/JS/Web-SDK/require.js",
-		"/Users/scott/Code/JS/Web-SDK/compiler/library/closure-library-master/closure/goog/disposable/disposable_test.html",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jscs/node_modules/jscs/lib/rules/disallow-spaces-in-for-statement.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jscs/node_modules/jscs/lib/rules/disallow-implicit-type-conversion.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-util/node_modules/.bin/dateformat",
-		"/Users/scott/Code/JS/Web-SDK/compiler/README.md",
-		"/Users/scott/Code/JS/Web-SDK/compiler/library/closure-library-master/closure/goog/testing/asserts.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-util/lib/template.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/.bin/jsdoc",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jshint/node_modules/lodash/internal/reEvaluate.js",
-		"/Users/scott/Code/JS/Web-SDK/node_modules/gulp-jscs/node_modules/jscs/lib/rules/require-dot-notation.js",
-		"/Users/scott/Code/JS/Web-SDK/docs/2_branch.md",
-		"/Users/scott/Code/JS/Web-SDK/dist/branch.min.js",
-		"/Users/scott/Code/JS/Web-SDK/package.json",
-		"/Users/scott/Code/JS/Web-SDK/src/branch.js"
+		"/Users/scott/Code/JS/Web-SDK/node_modules/jsdoc/test/fixtures/testPlugin1.js"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -578,6 +642,54 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".branchsters-button",
+			"#branchsters-create-button",
+			"#branchsters-sms-send",
+			"#branchsters-sms-sent",
+			"selectedFace",
+			"html",
+			"build",
+			"showSMSSent",
+			"smsError",
+			"showSMSSent",
+			"smsError",
+			"setTimeout",
+			"apply",
+			"interfaceResetTime",
+			"error",
+			"$scope",
+			"onTextClick",
+			"createBranchster",
+			"incrementFace",
+			"switchColor",
+			"getDesc",
+			"resetShows",
+			"getDescription",
+			"linkData",
+			"sendSMS",
+			"resetShows",
+			"makeLink",
+			"loopIncrement",
+			"defaultName",
+			"ngDialog",
+			"main",
+			"branchsterWebApp",
+			"MainCtrl",
+			"wiredep",
+			"onTextClick",
+			"popup",
+			"ng-dis",
+			"ng-dia",
+			"ng-ena",
+			"$scope.phone",
+			"smsError",
+			"sms",
+			"desktop_url",
+			"%@",
+			"binding",
+			"karma",
+			"build",
+			".jpg",
 			"try",
 			"branch.init",
 			"\"track\"]",
@@ -657,55 +769,7 @@
 			"'],\n",
 			"hideBanner",
 			"shouldAppend",
-			"message",
-			"init",
-			"branch",
-			"close",
-			"branch",
-			"utils.store",
-			"session",
-			"sessionFallback",
-			"sessionFallback()",
-			"sessionFallback",
-			"utils.hasApp",
-			"\nutils.hasApp",
-			"utils.readKeyValue",
-			"utils.storeKeyValue",
-			"utils.store",
-			"utils",
-			"branch",
-			"utils",
-			"session",
-			"sessionStorage",
-			"session",
-			"sessionStorage",
-			"console.log",
-			"Storage;",
-			"store(",
-			"readStore",
-			"sessionStorage",
-			"XHRRequest",
-			"sessionStorage",
-			"branch",
-			"utils.sessionStorage",
-			"sessionStorage",
-			"console.log",
-			"mobileAction",
-			"getElementById(\"sms-form\")",
-			"freshtake",
-			"logout",
-			"sendSMS",
-			"sendSMSNew",
-			"sendSMSExisting",
-			"credits",
-			"self",
-			"click_id",
-			"click_",
-			"DEBUG",
-			"<<<",
-			"urlValue",
-			"<!",
-			"};\n"
+			"message"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -713,6 +777,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$name",
+			"directive",
 			"\"test_id\"",
 			"make_new_link",
 			"{ }",
@@ -770,30 +836,57 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "css/style.css",
+					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2282,
+						"buffer_size": 3859,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								537,
-								537
+								2369,
+								2369
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 599.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/views/main.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4493,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1659,
+								1659
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -803,61 +896,143 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "index-react.html",
+					"buffer": 2,
+					"file": "Gruntfile.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5201,
+						"buffer_size": 9771,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5184,
-								5170
+								7604,
+								7604
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1811.0,
+						"translation.y": 4732.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/styles/main.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3625,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								503,
+								2480
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2242.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/scripts/controllers/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6071,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5496,
+								5496
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 6.0,
+						"translation.y": 2264.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/scripts/services/utilities.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2196,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1782,
+								1782
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "index.html",
+					"buffer": 6,
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2950,
+						"buffer_size": 31877,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1616,
-								1616
+								31159,
+								31159
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 11549.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -901,7 +1076,7 @@
 	"project": "branchsters.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -909,6 +1084,46 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"read",
+				"README.md"
+			],
+			[
+				"gruntfil",
+				"Gruntfile.js"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"circ",
+				"circle.yml"
+			],
+			[
+				"circl",
+				"circle.yml"
+			],
+			[
+				"readm",
+				"node_modules/grunt/node_modules/colors/ReadMe.md"
+			],
+			[
+				"main",
+				"app/views/main.html"
+			],
+			[
+				"grun",
+				"Gruntfile.js"
+			],
+			[
+				"bower",
+				"bower.json"
+			],
+			[
+				"bowerrc",
+				".bowerrc"
+			],
 			[
 				"index",
 				"index-react.html"
@@ -1030,16 +1245,8 @@
 				"docs/0_intro.md"
 			],
 			[
-				"bower",
-				"bower.json"
-			],
-			[
 				"change",
 				"CHANGELOG.md"
-			],
-			[
-				"read",
-				"README.md"
 			],
 			[
 				"bowe",

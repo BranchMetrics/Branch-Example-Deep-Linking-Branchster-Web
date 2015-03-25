@@ -13,6 +13,10 @@ angular.module('branchsterWebApp')
 	})
   .controller('MainCtrl', ['$scope', 'Facebook', 'utilities', function ($scope, Facebook, utilities) {
 
+  	$scope.updateDescription = function() {
+    	$scope.description = utilities.getDescription($scope);
+    };
+	    
   	$scope.init = function() {
   		// available branchster colors
 	    $scope.colors = [ '#24A4DD', '#EC6279', '#29B471', '#F69938', '#84268B', '#24CADA', '#FED521', '#9E1623' ];
@@ -34,7 +38,7 @@ angular.module('branchsterWebApp')
 	    $scope.selectedBodyIndex = 0;
 	    $scope.selectedColorIndex = 0;
 	    $scope.branchsterName = $scope.defaultName;
-	    $scope.description = utilities.getDescription($scope);
+	    $scope.updateDescription();
 
 	    // Links
 	    $scope.phone = '';
