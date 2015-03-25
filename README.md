@@ -81,7 +81,7 @@ First, let's some modifications to the boilerplate Yeoman Angular template.
 ##### app/index.html
 - 5: *add* ```<title>Branchsters Web</title>```
 - 26...30: *remove* ```<ul class="nav nav-pills pull-right">...</ul>```
-- 31: *change to* ```<h3 class="text-muted">Brancshters Monster Factory</h3>```
+- 31: *change to* ```<h3 class="text-muted">Branchsters Monster Factory</h3>```
 - 37: *change to* ```<p><span class="glyphicon glyphicon-heart"></span> from the <a href="http://branch.io">Branch Metrics team</a></p>```
 - 75: *remove* ```<script src="scripts/controllers/about.js"></script>```
 
@@ -149,7 +149,7 @@ app/views/main.html
 ```
 <form>
 	<div class="form-group">
-		<label for="name" class="branchsters-heading">Choose your Monster's name</label>
+		<label for="name" class="branchsters-heading">Choose your Branchster's name</label>
 		<input type="text" class="form-control" id="name" name="name" placeholder="John">
 	<div class="form-group">
 		<label for="body" class="branchsters-heading">Choose face and body</label>
@@ -174,7 +174,7 @@ app/views/main.html
 		</div>
 	</div>
 	<div class="form-group branchsters-heading">
-		<button type="button" class="btn btn-default btn-lg btn-success" id="branchsters-create-button">CREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success" id="branchsters-create-button">CREATE YOUR BRANCHSTER</button>
 	</div>
 </form>
 ```
@@ -646,7 +646,7 @@ app/views/main.html
 <div ng-hide="loaded" class="branchsters-heading">Loading...</div>
 <form ng-show="loaded">
 	<div class="form-group">
-		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
+		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Bracnhster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
 		<input type="text" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
 		<p class="lead" id="branchsters-description" ng-bind="description"></p>
@@ -674,7 +674,7 @@ app/views/main.html
 	</div>
 	<div ng-hide="showEditor" class="form-group"  ng-class="{ 'has-error':smsError }">
 		<p class="lead" ng-hide="showEditor" id="branchsters-display-link" ng-bind="displayLink"></p>
-		<label for="color" class="branchsters-heading">Share Your Monster</label>
+		<label for="color" class="branchsters-heading">Share Your Branchster</label>
 		<div class="jumbotron branchsters-square">
 			<div class="btn-group btn-group-lg" role="group">
 				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
@@ -693,8 +693,8 @@ app/views/main.html
 		</div>
 	</div>
 	<div class="form-group branchsters-heading">
-		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
-		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR BRANCHSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR BRANCHSTER</button>
 	</div>
 </form>
 ```

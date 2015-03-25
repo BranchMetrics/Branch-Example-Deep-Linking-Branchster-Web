@@ -1,7 +1,7 @@
 <div ng-hide="loaded" class="branchsters-heading">Loading...</div>
 <form ng-show="loaded">
 	<div class="form-group">
-		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Monster's name</label>
+		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Branchster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
 		<input type="text" ng-change="updateDescription()" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
 		<p class="lead" id="branchsters-description" ng-bind="description"></p>
@@ -29,7 +29,7 @@
 	</div>
 	<div ng-hide="showEditor" class="form-group"  ng-class="{ 'has-error':smsError }">
 		<p class="lead" ng-hide="showEditor" id="branchsters-display-link" ng-bind="displayLink"></p>
-		<label for="color" class="branchsters-heading">Share Your Monster</label>
+		<label for="color" class="branchsters-heading">Share Your Branchster</label>
 		<div class="jumbotron branchsters-square">
 			<div class="btn-group btn-group-lg" role="group">
 				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 	<div class="form-group branchsters-heading">
-		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR MONSTER</button>
-		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR MONSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR BRANCHSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR BRANCHSTER</button>
 	</div>
 </form>
