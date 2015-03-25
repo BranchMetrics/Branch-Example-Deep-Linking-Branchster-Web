@@ -149,7 +149,7 @@ app/views/main.html
 ```
 <form>
 	<div class="form-group">
-		<label for="name" class="branchsters-heading">Choose your Branchster's name</label>
+		<label for="name" class="branchsters-heading">Choose your branchster's name</label>
 		<input type="text" class="form-control" id="name" name="name" placeholder="John">
 	<div class="form-group">
 		<label for="body" class="branchsters-heading">Choose face and body</label>
@@ -646,7 +646,7 @@ app/views/main.html
 <div ng-hide="loaded" class="branchsters-heading">Loading...</div>
 <form ng-show="loaded">
 	<div class="form-group">
-		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Bracnhster's name</label>
+		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your bracnhster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
 		<input type="text" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
 		<p class="lead" id="branchsters-description" ng-bind="description"></p>

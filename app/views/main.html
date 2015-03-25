@@ -1,7 +1,7 @@
 <div ng-hide="loaded" class="branchsters-heading">Loading...</div>
 <form ng-show="loaded">
 	<div class="form-group">
-		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your Branchster's name</label>
+		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your branchster's name</label>
 		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
 		<input type="text" ng-change="updateDescription()" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
 		<p class="lead" id="branchsters-description" ng-bind="description"></p>
