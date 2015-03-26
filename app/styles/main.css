@@ -24,6 +24,19 @@ body {
   padding-bottom: 19px;
 }
 
+/* Branchster font */
+@font-face {
+    font-family: 'germsmonsters';
+    src: url('../fonts/Germs-webfont.eot');
+    src: url('../fonts/Germs-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Germs-webfont.woff2') format('woff2'),
+         url('../fonts/Germs-webfont.woff') format('woff'),
+         url('../fonts/Germs-webfont.ttf') format('truetype'),
+         url('../fonts/Germs-webfont.svg#germsmonsters') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Branchsters classes */
 input[type="text"] {
 	color: #555;
@@ -44,6 +57,11 @@ input[type="text"] {
 
 .header {
 	margin-bottom: 0 !important;
+}
+
+#branchsters-title {
+	font-family: 'germsmonsters';
+	font-size: 60px;
 }
 
 h3 {

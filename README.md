@@ -637,6 +637,40 @@ There are six functions here that we use more than once in the controller (or ma
 - **getDescription**: Moved from the controller, as it is not directly called by the view. Returns the correctdescription for the current faceIndex, and name.
 - **flashState**: Toggles a variable to `true`, then back to `false`, for the desired amount of time. Used to show error and success form feedback for 3000 miliseconds.
 
+##### Custom Font
+
+We have a really scarry looking custom font to use for the title (our users are making monsters after all). If we look at the Gruntfile around line 300, we see that the build phase already copies any files in `font`/*` to the `dist`. So let's `$ mkdir fonts`, and put our custom font in there - it's called Germs and in this repo for reference. Now we need to add a `@font-sace` to the stylesheet:
+
+```
+/* Branchster font */
+@font-face {
+    font-family: 'germsmonsters';
+    src: url('../fonts/Germs-webfont.eot');
+    src: url('../fonts/Germs-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Germs-webfont.woff2') format('woff2'),
+         url('../fonts/Germs-webfont.woff') format('woff'),
+         url('../fonts/Germs-webfont.ttf') format('truetype'),
+         url('../fonts/Germs-webfont.svg#germsmonsters') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+```
+
+Let's also make an id style we can add to the page title:
+
+```
+#branchsters-title {
+	font-family: 'germsmonsters';
+	font-size: 60px;
+}
+```
+
+Lastly, let's change line 23 of index.html:
+
+```
+<h3 id="branchsters-title" class="text-muted branchsters-heading">BRANCHSTERS MONSTER FACTORY</h3>
+```
+
 ##### HTML for interface
 
 Next, we need to update our interface. We need to add `ng-show` directives to all of the labels, inputs, and buttons that have to do with making a Branchster, and ng-hide directives to every element that has to do with viewing a Branchster. Additionally, we're adding a 'RECREATE BRANCHSTER' button with an `ng-hide` directive to toggle back to editing mode, and a button group of the four sharing options.
