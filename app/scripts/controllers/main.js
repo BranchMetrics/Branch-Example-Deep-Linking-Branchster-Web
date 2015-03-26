@@ -62,10 +62,11 @@ angular.module('branchsterWebApp')
 	  		// Load Branchster
 	  		/*jshint -W069 */
 	  		if (data.data) {
-				$scope.selectedFaceIndex = data.data['face_index'];
-			    $scope.selectedBodyIndex = data.data['body_index'];
-			    $scope.selectedColorIndex = data.data['color_index'];
-				$scope.branchsterName = data.data['monster_name'];
+	  			var dataObject = JSON.parse(data.data);
+				$scope.selectedFaceIndex = dataObject['face_index'];
+			    $scope.selectedBodyIndex = dataObject['body_index'];
+			    $scope.selectedColorIndex = dataObject['color_index'];
+				$scope.branchsterName = dataObject['monster_name'];
 	  		}
 			/*jshint +W069 */
 		});
