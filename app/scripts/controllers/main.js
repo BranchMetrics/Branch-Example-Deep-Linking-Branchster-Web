@@ -11,7 +11,7 @@ angular.module('branchsterWebApp')
 	.config(function(FacebookProvider) {
 		 FacebookProvider.init('348703352001630');
 	})
-  .controller('MainCtrl', ['$scope', 'Facebook', 'utilities', function ($scope, Facebook, utilities) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'Facebook', 'utilities', function ($scope, $timeout, Facebook, utilities) {
 
   	$scope.updateDescription = function() {
     	$scope.description = utilities.getDescription($scope);
@@ -55,7 +55,7 @@ angular.module('branchsterWebApp')
 
   	$scope.load = function(data) {
   		// Interface
-		$scope.$apply(function() {
+		$timeout(function() {
 			$scope.showEditor = true;
 	  		$scope.loaded = true;
 
@@ -115,7 +115,7 @@ angular.module('branchsterWebApp')
 			tags: [ 'desktop_creator' ],
 			data: utilities.linkData($scope)
 		}, function(err, link) {
-			$scope.$apply(function() {
+			$timeout(function() {
 				if (channel === 'sms') {
 					$scope.showSMS = true;
 					$scope.smsLink = link;
@@ -174,7 +174,7 @@ angular.module('branchsterWebApp')
 				make_new_link: false
 			},
 			function(err) {
-				$scope.$apply(function() {
+				$timeout(function() {
 					if (err) {
 						utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
 					}
