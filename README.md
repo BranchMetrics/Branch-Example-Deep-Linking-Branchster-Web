@@ -364,9 +364,9 @@ angular.module('branchsterWebApp')
 	.config(function(FacebookProvider) {
 		 FacebookProvider.init('348703352001630');
 	})
-  .controller('MainCtrl', ['$scope', 'Facebook', 'utilities', function ($scope, Facebook, utilities) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'Facebook', 'utilities', function ($scope, $timeout, Facebook, utilities) {
 
-	$scope.updateDescription = function() {
+  	$scope.updateDescription = function() {
     	$scope.description = utilities.getDescription($scope);
     };
 
@@ -391,7 +391,7 @@ angular.module('branchsterWebApp')
 	    $scope.selectedBodyIndex = 0;
 	    $scope.selectedColorIndex = 0;
 	    $scope.branchsterName = $scope.defaultName;
-		$scope.updateDescription();
+	    $scope.updateDescription();
 
 	    // Links
 	    $scope.phone = '';
@@ -408,18 +408,18 @@ angular.module('branchsterWebApp')
 
   	$scope.load = function(data) {
   		// Interface
-  		if(!data['monster']) {
+		$timeout(function() {
 			$scope.showEditor = true;
-		}
-  		$scope.loaded = true;
+	  		$scope.loaded = true;
 
-  		// Load Branchster
-  		/*jshint -W069 */
-  		$scope.selectedFaceIndex = data['face_index'] || $scope.selectedFaceIndex;
-	    $scope.selectedBodyIndex = data['body_index'] || $scope.selectedBodyIndex;
-	    $scope.selectedColorIndex = data['color_index'] || $scope.selectedColorIndex;
-		$scope.branchsterName = data['monster_name'] || $scope.branchsterName;
-		/*jshint +W069 */
+	  		// Load Branchster
+	  		/*jshint -W069 */
+	  		$scope.selectedFaceIndex = data['face_index'] || $scope.selectedFaceIndex;
+		    $scope.selectedBodyIndex = data['body_index'] || $scope.selectedBodyIndex;
+		    $scope.selectedColorIndex = data['color_index'] || $scope.selectedColorIndex;
+			$scope.branchsterName = data['monster_name'] || $scope.branchsterName;
+			/*jshint +W069 */
+		});
   	};
 
     $scope.switchColor = function(color) {
@@ -440,8 +440,7 @@ angular.module('branchsterWebApp')
 		$scope.branchsterName = $scope.branchsterName || $scope.defaultName;
 		window.branch.banner({
 			title: 'Branchsters',
-			description: 'Open your Branchster in our mobile app!',
-			showDesktop: false,
+			description: 'Get the app!',
 			icon: 'images/icons/icon3.png'
 		}, {
 			channel: 'banner',
@@ -469,7 +468,7 @@ angular.module('branchsterWebApp')
 			tags: [ 'desktop_creator' ],
 			data: utilities.linkData($scope)
 		}, function(err, link) {
-			$scope.$apply(function() {
+			$timeout(function() {
 				if (channel === 'sms') {
 					$scope.showSMS = true;
 					$scope.smsLink = link;
@@ -528,7 +527,7 @@ angular.module('branchsterWebApp')
 				make_new_link: false
 			},
 			function(err) {
-				$scope.$apply(function() {
+				$timeout(function() {
 					if (err) {
 						utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
 					}
@@ -551,6 +550,7 @@ angular.module('branchsterWebApp')
     	}
 	});
 }]);
+
 ```
 ##### Explanation
 All default values, and the colors and descriptions array have been added to an `init` function. We've also added a `loaded` function, that triggers showing the interface, and any Branchster provided by the Branch link. We trigger this by moving the `window.branch.init` function from the include tag in `index.html`, to the bottom of the controller. So let's remove that from `index.html`, leaving just:
