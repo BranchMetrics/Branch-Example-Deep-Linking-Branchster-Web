@@ -356,7 +356,7 @@ As part of this integration, we want an easy way of using the Facebook JS SDK to
 $ bower install --save angular-facebook
 ```
 
-You'll see below, that we also need to add this as a dependency to our contreoller using Angular array notation. Let's add a few more methods to the Angular controller, and refactor our code to keep things DRY.
+You'll see below, that we also need to add this as a dependency to our controller using Angular array notation. Let's add a few more methods to the Angular controller, and refactor our code to keep things DRY. We've also added a call to `branch.banner` in the `createBranchster` method. This displays a smart banner on desktop that has an SMS link form, and on mobile devices a link to the native app in the Android and iOS app stores. For a deeper explanation of smart banners, see the [app banner integration guide](https://github.com/BranchMetrics/Branch-Integration-Guides/blob/master/smart-banner-guide.md#app-banner).
 
 app/scripts/controllers/main.js
 ```
