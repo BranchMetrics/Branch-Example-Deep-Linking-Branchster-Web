@@ -67,6 +67,8 @@ angular.module('branchsterWebApp')
 			    $scope.selectedBodyIndex = dataObject['body_index'];
 			    $scope.selectedColorIndex = dataObject['color_index'];
 				$scope.branchsterName = dataObject['monster_name'];
+				$scope.updateDescription();
+				$scope.showEditor = false;
 	  		}
 			/*jshint +W069 */
 		});
