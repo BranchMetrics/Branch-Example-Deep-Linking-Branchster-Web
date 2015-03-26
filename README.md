@@ -639,7 +639,7 @@ There are six functions here that we use more than once in the controller (or ma
 
 ##### Custom Font
 
-We have a really scarry looking custom font to use for the title (our users are making monsters after all). If we look at the Gruntfile around line 300, we see that the build phase already copies any files in `font`/*` to the `dist`. So let's `$ mkdir fonts`, and put our custom font in there - it's called Germs and in this repo for reference. Now we need to add a `@font-sace` to the stylesheet:
+We have a really scarry looking custom font to use for the title (our users are making monsters after all). If we look at the Gruntfile around line 300, we see that the build phase already copies any files in `fonts/*` to the `dist`. So let's `$ mkdir fonts`, and put our custom font in there - it's called Germs and in this repo for reference. Now we need to add a `@font-sace` to the stylesheet:
 
 ```
 /* Branchster font */
