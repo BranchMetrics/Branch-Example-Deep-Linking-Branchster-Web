@@ -316,7 +316,7 @@ h3 {
 #branchsters-create-button {
 	top: -20px;
 	position: relative;
-	
+
 	background: #00D0F3;
 	border-color: #00A7C3;
 }
@@ -338,7 +338,7 @@ This will automatically add a script tag to the bottom of your index.html file:
 You'll also need to initialize the SDK with your App Key. Per the Branch Web SDK instructions, include this tag at the bottom of your index.html, after the `<script>` tag Bower added:
 ```
 <script type="text/javascript">
-	(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-v1.2.0.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"init data setIdentity logout track link sendSMS referrals credits redeem banner".split(" "),0);
+	(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-v1.3.3.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"init data setIdentity logout track link sendSMS referrals credits redeem banner".split(" "),0);
 
 	branch.init('APP-KEY', function(err, data) {
 	    // callback to handle err or data
@@ -414,10 +414,15 @@ angular.module('branchsterWebApp')
 
 	  		// Load Branchster
 	  		/*jshint -W069 */
-	  		$scope.selectedFaceIndex = data['face_index'] || $scope.selectedFaceIndex;
-		    $scope.selectedBodyIndex = data['body_index'] || $scope.selectedBodyIndex;
-		    $scope.selectedColorIndex = data['color_index'] || $scope.selectedColorIndex;
-			$scope.branchsterName = data['monster_name'] || $scope.branchsterName;
+	  		if (data.data) {
+	  			var dataObject = JSON.parse(data.data);
+				$scope.selectedFaceIndex = dataObject['face_index'];
+			    $scope.selectedBodyIndex = dataObject['body_index'];
+			    $scope.selectedColorIndex = dataObject['color_index'];
+				$scope.branchsterName = dataObject['monster_name'];
+				$scope.updateDescription();
+				$scope.showEditor = false;
+	  		}
 			/*jshint +W069 */
 		});
   	};
@@ -472,7 +477,7 @@ angular.module('branchsterWebApp')
 				if (channel === 'sms') {
 					$scope.showSMS = true;
 					$scope.smsLink = link;
-				} 
+				}
 				else if (channel === 'display') {
 					$scope.displayLink = link;
 				}
@@ -531,7 +536,7 @@ angular.module('branchsterWebApp')
 					if (err) {
 						utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
 					}
-					else {					
+					else {
 						utilities.flashState($scope, 'showSMSSent', $scope.interfaceResetTime);
 					}
 				});
