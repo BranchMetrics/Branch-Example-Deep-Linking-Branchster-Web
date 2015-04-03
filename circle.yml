@@ -19,7 +19,7 @@ test:
 
 deployment:
   production:
-    branch: angular
+    branch: master
     commands:
       - bundle exec s3cp -r dist/* s3://branch-web-sdk/branchster-angular/
       - sudo pip install awscli
