@@ -143,6 +143,10 @@ $scope.incrementBody = function(amount) {
 ##### Explanation
 This code is fairly straightforward. Essentially, there are 3 indices that control what the Branchster looks like, `selectedFaceIndex`, `selectedBodyIndex`, and `selectedColorIndex`. These three indicies are incremented and decremented by the methods `switchColor`, `incrementFace`, and `incrementBody`. The method `switchColor` accepts one argument, which is the index of the desired color in the `colors` array. This is set by clicking one of the color buttons, as seen in the HTML below. The methods `incrementFace` and `incrementBody` accepts one argument: an increment amount (either a 1, or a -1). This value is passed into `loopIncrement`, which loops through the available bodies and faces, i.e. if the current value of `selectedFaceIndex` is 3 (the maximum - last available face) and an increment amount of +1 is recieved, it will return 0, looping back to the beginning of available faces.
 
+To better undertand the goal, here's an animation of the functionality we want:
+
+![Gif animation of Branchsters flipping through faces and bodies](tutorial-imgs/branchsters-animation.gif)
+
 ##### HTML for interface
 
 app/views/main.html
