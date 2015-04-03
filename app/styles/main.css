@@ -1,0 +1,249 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Branchster font */
+@font-face {
+    font-family: 'germsmonsters';
+    src: url('../fonts/Germs-webfont.eot');
+    src: url('../fonts/Germs-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Germs-webfont.woff2') format('woff2'),
+         url('../fonts/Germs-webfont.woff') format('woff'),
+         url('../fonts/Germs-webfont.ttf') format('truetype'),
+         url('../fonts/Germs-webfont.svg#germsmonsters') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Branchsters classes */
+input[type="text"] {
+	color: #555;
+	text-align: center;
+	margin-top: 10px;
+	padding: 0px 30px;
+	font-size: 25px;
+	color: #333;
+	font-family: 'Roboto', Arial;
+	font-weight: 100;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	background: #FFF;
+	height: 40px;
+	box-sizing: border-box;
+}
+
+.header {
+	margin-bottom: 0 !important;
+}
+
+#branchsters-title {
+	font-family: 'germsmonsters';
+	font-size: 60px;
+}
+
+h3 {
+	font-size: 40px;
+	font-weight: 500 !important;
+	color: #c6d6ec !important;
+}
+
+.branchsters-heading {
+	font-family: 'Roboto', Arial;
+	font-size: 28px;
+	color: #000;
+	font-weight: 100;
+	text-align: center;
+	width: 100%;
+	padding-top: 30px;
+}
+
+.branchsters-body-container {
+	  position: relative;
+	  height: 400px;
+}
+
+.branchsters-bodypart {
+	width: 200px;
+	height: 300px;
+	position: absolute;
+	margin-left: -100px;
+}
+
+.branchsters-square {
+	border: 1px solid #CCC;
+	border-bottom: 1px solid #CCC !important;
+	border-style: solid;
+	background-color: #fff;
+	border-radius: 20px !important;
+}
+
+#brachsters-name {
+	margin-bottom: 20px;
+}
+
+#branchsters-face {
+	z-index: 3;
+}
+
+#branchsters-description {
+	height: 115px;
+}
+
+#branchsters-body {
+	z-index: 2;
+}
+
+#branchsters-display-link {
+	text-align: center;
+	height: 30px;
+}
+
+.branchsters-bodycolor {
+	z-index: 1;
+}
+
+.branchsters-color-button {
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.branchsters-arrow {
+	cursor: pointer !important;
+}
+
+.branchsters-left-arrow {
+	position: absolute;
+	top: 190px;
+	left: 40px;
+}
+
+.branchsters-right-arrow {
+	position: absolute;
+	top: 190px;
+	right: 40px;
+}
+
+.branchsters-up-arrow {
+	position: absolute;
+	top: 10px;
+}
+
+.branchsters-down-arrow {
+	position: absolute;
+	bottom: 10px;
+}
+
+.branchsters-share-icon {
+	vertical-align: top;
+	margin-left: -8px;
+}
+
+.branchsters-button {
+	text-transform: uppercase;
+	border-radius: 8px;
+	font-family: 'Roboto', Arial;
+	color: #FFF;
+	text-decoration: none;
+	font-size: 25px;
+	font-weight: 100;
+}
+
+#branchsters-create-button {
+	top: -20px;
+	position: relative;
+	
+	background: #00D0F3;
+	border-color: #00A7C3;
+}
+
+#branchsters-sms-send {
+	width: initial;
+	padding-top: 8px;
+	margin-top: 10px;
+}
+
+#branchsters-sms-sent {
+	display: block;
+	margin-top: 10px;
+	color: green;
+	font-size: 18px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+  height: 50px;
+  width: 50px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}

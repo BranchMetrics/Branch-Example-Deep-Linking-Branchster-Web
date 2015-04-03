@@ -1,0 +1,54 @@
+<div ng-hide="loaded" class="branchsters-heading">Loading...</div>
+<form ng-show="loaded">
+	<div class="form-group">
+		<label for="name" ng-show="showEditor" class="branchsters-heading">Choose your branchster's name</label>
+		<label for="name" ng-hide="showEditor" class="branchsters-heading">{{branchsterName}}</label>
+		<input type="text" ng-change="updateDescription()" ng-show="showEditor" class="form-control" id="brachsters-name" name="name" placeholder="Name" ng-model="branchsterName">
+		<p class="lead" id="branchsters-description" ng-bind="description"></p>
+	<div class="form-group">
+		<label for="body" ng-show="showEditor" class="branchsters-heading">Choose face and body</label>
+		<div class="jumbotron branchsters-body-container branchsters-square" name="body">
+			<!-- monster components -->
+			<img class="branchsters-bodypart" id="branchsters-face" ng-src="images/monsters/faces/{{ selectedFaceIndex }}face.png"></img>
+			<img class="branchsters-bodypart" id="branchsters-body" ng-src="images/monsters/bodies/{{ selectedBodyIndex }}body.png"></img>
+			<img class="branchsters-bodypart branchsters-bodycolor" ng-style="{'background-color': colors[selectedColorIndex]}"></img>
+			<!-- arrows -->
+			<i class="fa fa-chevron-left fa-2x branchsters-arrow branchsters-left-arrow" ng-show="showEditor" ng-click="incrementBody(-1)"></i>
+			<i class="fa fa-chevron-right fa-2x branchsters-arrow branchsters-right-arrow" ng-show="showEditor" ng-click="incrementBody(1)"></i>
+			<i class="fa fa-chevron-up fa-2x branchsters-arrow branchsters-up-arrow" ng-show="showEditor" ng-click="incrementFace(-1)"></i>
+			<i class="fa fa-chevron-down fa-2x branchsters-arrow branchsters-down-arrow" ng-show="showEditor" ng-click="incrementFace(1)"></i>
+		</div>
+	</div>
+	<div ng-show="showEditor" class="form-group">
+		<label for="color" class="branchsters-heading">Pick a color</label>
+		<div class="jumbotron branchsters-square" name="color">
+			<div class="btn-group btn-group-lg" role="group" ng-repeat="color in colors">
+				<button type="button" class="btn btn-default branchsters-color-button" ng-model="color" ng-click="switchColor($index)" ng-style="{'background-color': color}"></button>
+			</div>
+		</div>
+	</div>
+	<div ng-hide="showEditor" class="form-group"  ng-class="{ 'has-error':smsError }">
+		<p class="lead" ng-hide="showEditor" id="branchsters-display-link" ng-bind="displayLink"></p>
+		<label for="color" class="branchsters-heading">Share Your Branchster</label>
+		<div class="jumbotron branchsters-square">
+			<div class="btn-group btn-group-lg" role="group">
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('sms')"><i class="fa fa-comment branchsters-share-icon"></i></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('facebook')"><i class="fa fa-facebook branchsters-share-icon"></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('twitter')"><i class="fa fa-twitter branchsters-share-icon"></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('pinterest')"><i class="fa fa-pinterest branchsters-share-icon"></i></button>
+				<button type="button" ng-disabled="interfaceWait" class="btn btn-default" ng-click="makeLink('clipboard')"><i class="fa fa-clipboard branchsters-share-icon"></i></button>
+			</div>
+			<!--- SMS -->
+			<input type="text" ng-show="showSMS" ng-disabled="interfaceWait" class="form-control" id="phone" name="phone" placeholder="(999) 999-999" ng-model="phone">
+			<button type="button" ng-show="showSMS" ng-disabled="interfaceWait" class="btn btn-default btn-success branchsters-button" ng-click="sendSMS()" id="branchsters-sms-send">Send</button>
+			<span id="branchsters-sms-sent" ng-show="showSMSSent">SMS Sent!</span>
+
+			<!-- Clipboard -->
+			<input type="text" ng-show="showClipboard" class="form-control" ng-model="clipboardLink" ng-click="onTextClick($event)" readonly="readonly">
+		</div>
+	</div>
+	<div class="form-group branchsters-heading">
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-show="showEditor" ng-click="createBranchster()" id="branchsters-create-button">CREATE YOUR BRANCHSTER</button>
+		<button type="button" class="btn btn-default btn-lg btn-success branchsters-button" ng-hide="showEditor" ng-click="recreateBranchster()" id="branchsters-create-button">RECREATE YOUR BRANCHSTER</button>
+	</div>
+</form>

@@ -1,0 +1,26 @@
+---
+machine:
+  node:
+    version: 0.10.31
+
+dependencies:
+  cache_directories:
+    - "~/nvm/v0.10.31"
+  post:
+    # http://blog.kupriyanov.com/2014/08/solved-fixed-lossy-operations-are-not.html
+    - sudo apt-get remove optipng
+    - npm install && npm install -g grunt grunt-cli bower
+    - bower install
+    - bundle install
+
+test:
+  override:
+    - grunt build
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - bundle exec s3cp -r dist/* s3://branch-web-sdk/branchster-angular/
+      - sudo pip install awscli
+      - aws s3 cp dist/index.html s3://branch-web-sdk/branchster-angular/index.html
