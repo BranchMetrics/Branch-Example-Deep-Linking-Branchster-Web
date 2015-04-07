@@ -137,18 +137,18 @@ h3 {
 .branchsters-left-arrow {
 	position: absolute;
 	top: 190px;
-	left: 40px;
+	left: 20px;
 }
 
 .branchsters-right-arrow {
 	position: absolute;
 	top: 190px;
-	right: 40px;
+	right: 20px;
 }
 
 .branchsters-up-arrow {
 	position: absolute;
-	top: 10px;
+	top: 0;
 }
 
 .branchsters-down-arrow {
