@@ -399,7 +399,15 @@
 			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 33633,
+				"buffer_size": 33822,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "circle.yml",
+			"settings":
+			{
+				"buffer_size": 614,
 				"line_ending": "Unix"
 			}
 		},
@@ -489,7 +497,8 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/scott/Code/JS/Branchster-Web"
+		"/Users/scott/Code/JS/Branchster-Web",
+		"/Users/scott/Code/JS/Branchster-Web/tutorial-imgs"
 	],
 	"file_history":
 	[
@@ -835,7 +844,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -851,8 +860,8 @@
 						"selection":
 						[
 							[
-								1755,
-								1755
+								1481,
+								1481
 							]
 						],
 						"settings":
@@ -864,7 +873,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -894,7 +903,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -922,7 +931,7 @@
 						"translation.y": 696.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -931,15 +940,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 33633,
+						"buffer_size": 33822,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16667,
-								16667
+								10670,
+								10670
 							]
 						],
 						"settings":
@@ -948,14 +957,44 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6370.0,
+						"translation.y": 3745.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "circle.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								326,
+								326
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "app/scripts/controllers/main.js",
 					"semi_transient": false,
 					"settings":
@@ -979,11 +1018,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "app/scripts/services/utilities.js",
 					"semi_transient": false,
 					"settings":
@@ -1008,7 +1047,7 @@
 						"translation.y": 359.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1438,7 +1477,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 150.0,
 	"status_bar_visible": true,
 	"template_settings":
