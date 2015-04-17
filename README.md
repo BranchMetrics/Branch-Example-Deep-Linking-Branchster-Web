@@ -4,10 +4,13 @@ The [Branch Web SDK](https://github.com/BranchMetrics/Web-SDK) is a simple and p
 
 This example is written with [AngularJS](https://angularjs.org/) and [Bootstrap](http://getbootstrap.com/), and the project was started and managed with [Yeoman](http://yeoman.io/). Aren't familiar with AngularJS? That's OK, we just assume you have some JavaScript knowledge. We also have examples with other frameworks, like [React](http://facebook.github.io/react/), on the way. If you're not familiar with Yeoman, that's also OK - it's essentially a three prong bundle which includes: generators for starting projects (over 1000 available now), [Bower](http://bower.io/) for installing and managing dependencies (Including the Branch Web SDK!), and [Grunt](http://gruntjs.com/) for build and development tasks, live reload, etc.
 
+### Live Example
+A live example of this app can be [found here](http://cdn.branch.io/branchster-angular).
+
 #### What we're going to build:
 ![Branchsters Screen Shot](tutorial-imgs/tut-screenshot.png)
 
-A live example of this app can be [found here](http://cdn.branch.io/branchster-angular).
+
 
 If you're only interested in seeing the example Branch Web SDK integration with Branchsters, skip to [step 4](#4-install-the-branch-web-sdk).
 
