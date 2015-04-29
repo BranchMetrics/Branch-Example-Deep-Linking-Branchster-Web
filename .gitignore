@@ -3,5 +3,6 @@ dist
 .tmp
 .sass-cache
 bower_components
-.sublime-workspace
-.sublime-project
+*.sublime-workspace
+*.sublime-project
+Gemfile.lock
