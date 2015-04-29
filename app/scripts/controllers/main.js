@@ -69,6 +69,17 @@ angular.module('branchsterWebApp')
 				$scope.branchsterName = dataObject['monster_name'];
 				$scope.updateDescription();
 				$scope.showEditor = false;
+
+				window.branch.banner({
+					title: 'Branchsters',
+					description: 'Get the app!',
+					icon: 'images/icons/icon3.png'
+				}, {
+					channel: 'banner',
+					feature: 'share',
+					tags: [ 'desktop_creator' ],
+					data: utilities.linkData($scope)
+				});
 	  		}
 			/*jshint +W069 */
 		});
