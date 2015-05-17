@@ -27,7 +27,7 @@ angular.module('branchsterWebApp')
 			'Creative and contagiously happy, $name has boundless energy and an appetite for learning about new things. He is vivacious and popular, and is always ready for the next adventure.',
 			'$name prefers to work alone and is impatient with hierarchies and politics.  Although he’s not particularly social, he has a razor sharp wit (and claws), and is actually very fun to be around.',
 			'Independent and ferocious, $name experiences life at 100 mph. Not interested in maintaining order, he is a fierce individual who is highly effective, successful, and incredibly powerful.',
-			'Peaceful, shy, and easygoing, $name takes things at his own pace and lives moment to moment. She is considerate, pleasant, caring, and introspective. She’s a bit nerdy and quiet -- but that’s why everyone loves him.'
+			'Peaceful, shy, and easygoing, $name takes things at her own pace and lives moment to moment. She is considerate, pleasant, caring, and introspective. She’s a bit nerdy and quiet -- but that’s why everyone loves her.'
 		];
 
 		// default name
@@ -130,7 +130,7 @@ angular.module('branchsterWebApp')
 				if (channel === 'sms') {
 					$scope.showSMS = true;
 					$scope.smsLink = link;
-				} 
+				}
 				else if (channel === 'display') {
 					$scope.displayLink = link;
 				}
@@ -189,7 +189,7 @@ angular.module('branchsterWebApp')
 					if (err) {
 						utilities.flashState($scope, 'smsError', $scope.interfaceResetTime);
 					}
-					else {					
+					else {
 						utilities.flashState($scope, 'showSMSSent', $scope.interfaceResetTime);
 					}
 				});
