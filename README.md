@@ -434,8 +434,12 @@ angular.module('branchsterWebApp')
 
 	  		// Load Branchster
 	  		/*jshint -W069 */
-	  		if (data.data) {
-	  			var dataObject = JSON.parse(data.data);
+	  		var dataObject = data.data ? JSON.parse(data.data) : undefined;
+	  		if (dataObject['face_index'] &&
+	  			dataObject['body_index'] &&
+	  			dataObject['body_index'] &&
+	  			dataObject['color_index'] &&
+	  			dataObject['monster_name']) {
 				$scope.selectedFaceIndex = dataObject['face_index'];
 			    $scope.selectedBodyIndex = dataObject['body_index'];
 			    $scope.selectedColorIndex = dataObject['color_index'];
