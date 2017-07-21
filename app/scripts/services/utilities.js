@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc service
- * @name branchsterWebApp.utilities
- * @description
- * # utilities
- * Service in the branchsterWebApp.
- */
-angular.module('branchsterWebApp')
+angular.module('bmf')
 	.service('utilities', ['$timeout', function ($timeout) {
 		this.popup = function(url, popupOptions) {
 			var left = (window.innerWidth  - popupOptions.width)  / 2,

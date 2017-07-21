@@ -3,7 +3,7 @@
 describe('Service: utilities', function () {
 
   // load the service's module
-  beforeEach(module('branchsterWebApp'));
+  beforeEach(module('bmf'));
 
   // instantiate service
   var utilities;
