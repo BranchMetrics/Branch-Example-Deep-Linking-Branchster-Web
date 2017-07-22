@@ -22,3 +22,9 @@ npm start
 ```
 
 #### deploy
+
+#### prod
+
+```
+open http://cdn.branch.io/branchster-angular/
+```
