@@ -42,7 +42,7 @@ angular.module('bmf')
       $scope.showSMSSent = false;
       $scope.loaded = false;
     };
-    
+
     $scope.load = function(data) {
       // Interface
       $timeout(function() {
