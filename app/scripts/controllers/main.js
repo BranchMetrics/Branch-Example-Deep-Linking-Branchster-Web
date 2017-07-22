@@ -42,20 +42,7 @@ angular.module('bmf')
       $scope.showSMSSent = false;
       $scope.loaded = false;
     };
-
-    $scope.openBanner = function(scope) {
-      window.branch.banner({
-        title: 'Branchsters',
-        description: 'Get the app!',
-        icon: 'images/icons/icon3.png'
-      }, {
-        channel: 'banner',
-        feature: 'share',
-        tags: ['desktop_creator'],
-        data: utilities.linkData(scope)
-      });
-    };
-
+    
     $scope.load = function(data) {
       // Interface
       $timeout(function() {
@@ -75,7 +62,6 @@ angular.module('bmf')
           dataObject.monster_name) {
           $scope.updateDescription();
           $scope.showEditor = false;
-          $scope.openBanner($scope);
         }
       });
     };
@@ -96,7 +82,6 @@ angular.module('bmf')
     $scope.createBranchster = function() {
       $scope.showEditor = false;
       $scope.branchsterName = $scope.branchsterName || $scope.defaultName;
-      $scope.openBanner($scope);
       $scope.makeLink('display');
     };
 
