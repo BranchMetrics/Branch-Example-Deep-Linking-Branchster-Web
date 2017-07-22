@@ -25,6 +25,4 @@ npm start
 
 #### prod
 
-```
-open http://cdn.branch.io/branchster-angular/
-```
+[http://cdn.branch.io/branchster-angular/](http://cdn.branch.io/branchster-angular/)
