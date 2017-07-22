@@ -1,29 +1,24 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name branchsterWebApp
- * @description
- * # branchsterWebApp
- *
- * Main module of the application.
- */
-angular
-  .module('branchsterWebApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngTouch',
-    'facebook'
+angular.module('bmf', [
+  'ngAnimate',
+  'ngCookies',
+  'ngResource',
+  'ngRoute',
+  'ngSanitize',
+  'ngTouch',
+  'facebook'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+.config(function ($routeProvider, $locationProvider, FacebookProvider) {
+  FacebookProvider.init('348703352001630');
+  $locationProvider.hashPrefix('');
+  $routeProvider
+  .when('/', {
+    templateUrl: 'views/main.html',
+    controller: 'MainCtrl',
+    controllerAs: 'main'
+  })
+  .otherwise({
+    redirectTo: '/'
   });
+});

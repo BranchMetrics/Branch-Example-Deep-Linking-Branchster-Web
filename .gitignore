@@ -1,8 +1,5 @@
-node_modules
-dist
-.tmp
-.sass-cache
-bower_components
-*.sublime-workspace
-*.sublime-project
-Gemfile.lock
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
