@@ -11,19 +11,22 @@
     ```
     git clone git@github.com:BranchMetrics/Branch-Example-Deep-Linking-Branchster-Web.git
     cd Branch-Example-Deep-Linking-Branchster-Web
-    npm install
-    bower install
+    npm run create
     ```
 
 - #### develop
 
-  ```
-  npm start
-  ```
+    ```
+    npm run develop
+    ```
 
 - #### deploy
 
-  - automatically done when pushing code to `master`
+    ```
+    npm run deploy
+    ```
+
+  - merge code into `master`
 
 - #### production
 
