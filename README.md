@@ -23,7 +23,7 @@
 
 - #### deploy
 
-  - automatically done on production
+  - automatically done when pushing code to production
 
 - #### prod
 
