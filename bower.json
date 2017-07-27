@@ -18,7 +18,7 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "bmfApp",
+  "moduleName": "bmf",
   "overrides": {
     "bootstrap": {
       "main": [
