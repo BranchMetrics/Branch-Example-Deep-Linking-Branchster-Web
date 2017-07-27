@@ -1,12 +1,12 @@
 # Branch Monster Factory
 
-#### dependencies 
+- #### dependencies 
 
     ```
     npm install -g grunt-cli bower yo generator-karma generator-angular
     ```
 
-#### code
+- #### code
 
     ```
     git clone git@github.com:BranchMetrics/Branch-Example-Deep-Linking-Branchster-Web.git
@@ -15,16 +15,16 @@
     bower install
     ```
 
-#### develop
+- #### develop
 
   ```
   npm start
   ```
 
-#### deploy
+- #### deploy
 
   - automatically done on production
 
-#### prod
+- #### prod
 
   - [http://cdn.branch.io/branchster-angular/](http://cdn.branch.io/branchster-angular/)
