@@ -23,8 +23,8 @@
 
 - #### deploy
 
-  - automatically done when pushing code to production
+  - automatically done when pushing code to `master`
 
-- #### prod
+- #### production
 
   - [http://cdn.branch.io/branchster-angular/](http://cdn.branch.io/branchster-angular/)
