@@ -3,7 +3,7 @@
 - #### dependencies 
 
     ```
-    npm install -g grunt-cli bower yo generator-karma generator-angular
+    npm i -g grunt-cli bower yo generator-karma generator-angular
     ```
 
 - #### code
