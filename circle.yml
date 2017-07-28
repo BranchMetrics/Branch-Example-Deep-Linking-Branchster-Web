@@ -4,8 +4,6 @@ machine:
     version: 0.10.31
 
 dependencies:
-  cache_directories:
-    - "~/nvm/v0.10.31"
   post:
     # http://blog.kupriyanov.com/2014/08/solved-fixed-lossy-operations-are-not.html
     - sudo apt-get remove optipng
