@@ -7,7 +7,7 @@ dependencies:
   post:
     # http://blog.kupriyanov.com/2014/08/solved-fixed-lossy-operations-are-not.html
     - sudo apt-get remove optipng
-    - npm install && npm install -g grunt-cli bower
+    - npm install && npm install -g bower
     - bower cache clean
     - bower install
     - bundle install
