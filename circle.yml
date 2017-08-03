@@ -21,6 +21,5 @@ deployment:
   production:
     branch: master
     commands:
-      - bundle exec s3cp -r dist/* s3://branch-cdn/branchster-angular/
       - sudo pip install awscli
       - aws s3 cp dist/ s3://branch-cdn/branchster-angular/ --recursive
