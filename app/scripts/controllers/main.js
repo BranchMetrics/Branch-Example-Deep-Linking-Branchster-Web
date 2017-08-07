@@ -50,7 +50,7 @@ angular.module('bmf')
         $scope.loaded = true;
 
         // Load Branchster
-        var dataObject = data.data ? JSON.parse(data.data) : undefined;
+        var dataObject = data.data_parsed ? data.data_parsed : {};
         $scope.selectedFaceIndex = dataObject.face_index || $scope.selectedFaceIndex;
         $scope.selectedBodyIndex = dataObject.body_index || $scope.selectedBodyIndex;
         $scope.branchsterName = dataObject.monster_name || $scope.branchsterName;

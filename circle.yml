@@ -15,7 +15,7 @@ dependencies:
 
 test:
   override:
-    - grunt build
+    - npm run deploy
 
 deployment:
   production:

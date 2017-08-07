@@ -35,7 +35,7 @@
   "scripts": {
     "create": "rm -rf node_modules && rm -rf bower_components && npm i -g yarn bower grunt-cli && yarn install && bower install",
     "develop": "grunt serve",
-    "deploy": "grunt build",
+    "deploy": "grunt build && cp -rf ./app/images/ ./dist/images && cp -rf ./app/fonts/ ./dist/fonts",
     "test": "grunt test"
   }
 }
