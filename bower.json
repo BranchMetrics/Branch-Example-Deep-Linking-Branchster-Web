@@ -10,7 +10,7 @@
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
-    "branch-sdk": "^2.24.0",
+    "branch-sdk": "^2.46.0",
     "font-awesome": "fontawesome#^4.7.0",
     "angular-facebook": "^0.2.3"
   },
