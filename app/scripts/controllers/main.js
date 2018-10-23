@@ -174,4 +174,5 @@ angular.module('bmf')
         $scope.load(data);
       }
     });
+    window.branch.track('some_event', null, null);
   }]);
