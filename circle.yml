@@ -18,10 +18,10 @@ test:
     - npm run deploy
 
 deployment:
-  production:
-    branch: master
+  staging:
+    branch: beta-external
     commands:
       - sudo pip install awscli
-      - aws s3 cp dist/ s3://branch-cdn/branchster-angular/ --recursive
+      - aws s3 cp dist/ s3://branch-cdn/branchster-angular-beta/ --recursive
       - aws configure set preview.cloudfront true
-      - aws cloudfront create-invalidation --distribution-id E10P37NG0GMER --paths /branchster-angular/*
+      - aws cloudfront create-invalidation --distribution-id E10P37NG0GMER --paths /branchster-angular-beta/*
