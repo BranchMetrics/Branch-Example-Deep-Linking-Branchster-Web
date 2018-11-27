@@ -35,7 +35,8 @@
   "scripts": {
     "create": "rm -rf node_modules && rm -rf bower_components && npm i -g yarn bower grunt-cli && yarn install && bower install",
     "develop": "grunt serve",
-    "deploy": "grunt build && cp -rf ./app/images/ ./dist/images/ && cp -rf ./app/fonts/ ./dist/fonts/",
+    "deploy": "grunt build --force && cp -rf ./app/images/ ./dist/ && cp -rf ./app/fonts/ ./dist/",
+    "web-sdk": "cp ~/Documents/git_repos/web-branch-deep-linking/dist/build.js ~/Documents/git_repos/Branch-Example-Deep-Linking-Branchster-Web/dist/scripts/branch-websdk.js",
     "test": "grunt test"
   }
 }
