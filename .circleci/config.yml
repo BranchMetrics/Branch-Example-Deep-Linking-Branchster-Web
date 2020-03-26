@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/Branch-Example-Deep-Linking-Branchster-Web
     docker:
       - image: circleci/node:6.11.2
     steps:
