@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: circleci/node:6.11.2
     steps:
+      - checkout
       - run: sudo apt-get remove optipng
       - run: npm install -g yarn bower grunt-cli
       - run: yarn install
