@@ -24,6 +24,7 @@
 
     ```
     npm run deploy
+    aws s3 cp dist/ s3://branch-cdn/branchster-angular/ --recursive
     ```
 
   - merge code into `master`
