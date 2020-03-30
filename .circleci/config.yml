@@ -4,7 +4,9 @@ jobs:
     working_directory: ~/Branch-Example-Deep-Linking-Branchster-Web
     docker:
       - image: circleci/node:6.11.2
-    machine: true
+    environment:
+      DC2: true
+      BRANCH_STACK: node
     steps:
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - checkout
